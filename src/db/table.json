@@ -1,0 +1,210 @@
+[
+  {
+    "id": 0,
+    "name": "platform launch",
+    "columns": [
+      {
+        "name": "todo",
+        "color": "salmon",
+        "tasks": [
+          {
+            "title": "Test before peer review",
+            "description": "Test using jest",
+            "subtasks": [
+              {
+                "name": "Add to monthly review sheet",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "in progress",
+        "color": "teal",
+        "tasks": [
+          {
+            "title": "Start API",
+            "description": "Build endpoints for new internal tool",
+            "subtasks": [
+              {
+                "name": "test with postman",
+                "status": "completed"
+              },
+              {
+                "name": "test with postman",
+                "status": "completed"
+              },
+              {
+                "name": "test with postman",
+                "status": "completed"
+              }
+            ]
+          },
+          {
+            "title": "Start API",
+            "description": "Build endpoints for new internal tool",
+            "subtasks": [
+              {
+                "name": "test with postman",
+                "status": "completed"
+              },
+              {
+                "name": "test with postman",
+                "status": "completed"
+              },
+              {
+                "name": "test with postman",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "completed",
+        "color": "red",
+        "tasks": [
+          {
+            "title": "Build UI",
+            "description": "Build UI for new internal tool",
+            "subtasks": [
+              {
+                "name": "get budget from client",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "internal app for data mining",
+    "columns": [
+      {
+        "name": "todo",
+        "color": "teal",
+        "tasks": [
+          {
+            "title": "Setup meeting with teams involved",
+            "description": "Set expectations and budget",
+            "subtasks": [
+              {
+                "name": "Remind team of dead time",
+                "status": "incomplete"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "in progress",
+        "color": "blue",
+        "tasks": [
+          {
+            "title": "Build frontend",
+            "description": "Build the tool using react",
+            "subtasks": [
+              {
+                "name": "setup libraries",
+                "status": "completed"
+              },
+              {
+                "name": "Setup SASS",
+                "status": "incomplete"
+              },
+              {
+                "name": "Reach out to design team about changes",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "completed",
+        "color": "blue",
+        "tasks": [
+          {
+            "title": "Build UI",
+            "description": "Build UI for new internal tool",
+            "subtasks": [
+              {
+                "name": "get budget from client",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Company picnic",
+    "columns": [
+      {
+        "name": "todo",
+        "color": "green",
+        "tasks": [
+          {
+            "title": "Buy Food",
+            "description": "Buy snacks for company outing",
+            "subtasks": [
+              {
+                "name": "Buy sparkling water and soda",
+                "status": "completed"
+              },
+              {
+                "name": "Buy chips and pretzels",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "in progress",
+        "color": "purple",
+        "tasks": [
+          {
+            "title": "Start API",
+            "description": "Build endpoints for new internal tool",
+            "subtasks": [
+              {
+                "name": "test with postman",
+                "status": "completed"
+              },
+              {
+                "name": "test with postman",
+                "status": "completed"
+              },
+              {
+                "name": "test with postman",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "completed",
+        "color": "red",
+        "tasks": [
+          {
+            "title": "Build UI",
+            "description": "Build UI for new internal tool",
+            "subtasks": [
+              {
+                "name": "get budget from client",
+                "status": "completed"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
