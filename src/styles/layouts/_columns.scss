@@ -2,8 +2,8 @@
 @use "../mixins/" as *;
 
 .boardColumn {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
+  display: flex;
+  // grid-template-columns: repeat(auto-fill, 250px);
   gap: $sm-space;
   padding: $sm-space;
 }
@@ -17,6 +17,7 @@
   justify-content: center;
   padding-block: $md-space;
   background-color: #d5dadd;
+  min-width: 18rem;
   button {
     @include xl-heading($capital: true);
     color: $md-grey;

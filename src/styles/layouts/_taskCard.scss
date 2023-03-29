@@ -1,0 +1,128 @@
+@use "../general" as *;
+@use "../mixins" as *;
+
+.taskCardContainer {
+  position: absolute;
+  display: flex;
+  margin: auto;
+  inset: 0;
+  background-color: rgba(211, 211, 211, 0.8);
+  .closeBtn {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    cursor: pointer;
+    button {
+      display: block;
+      border-radius: 50%;
+      padding: 1rem;
+      width: 4rem;
+      height: 4rem;
+      color: white;
+      font-family: $font-family;
+      background-color: $primary;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.taskCardWrapper {
+  position: absolute;
+  margin: auto;
+  inset: 0;
+  width: min(720px, 100% - 3rem);
+  height: min(820px, 100% - 3rem);
+  background-color: $white;
+  padding: $md-space;
+  border-radius: 6px;
+}
+
+.taskAndMenuContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: $sm-space;
+  margin-bottom: $sm-space;
+  p {
+    @include lg-heading;
+  }
+}
+.details {
+  @include lg-body;
+  color: $md-grey;
+  margin-bottom: $sm-space;
+}
+
+.subtaskContainer {
+  @include lg-body;
+  .taskCount {
+    @include lg-body($capital: true);
+    margin-bottom: 3rem;
+  }
+}
+
+.subtaskWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: $md-space;
+}
+
+.checkboxWrapper {
+  display: flex;
+  gap: $sm-space;
+  background-color: $light-bg;
+  padding: 0.75rem;
+  border-radius: 4px;
+  &:hover {
+    background-color: $primary-hover;
+  }
+  input[type="checkbox"] {
+    accent-color: $primary;
+  }
+  p {
+    @include lg-body;
+    color: $black;
+  }
+  .completed {
+    text-decoration: line-through;
+    color: $md-grey;
+  }
+}
+
+.statusContainer {
+  @include lg-body($capital: true);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  ul {
+    display: flex;
+    width: auto;
+    flex-direction: column;
+    list-style: none;
+    overflow: hidden;
+    transition: height 3s;
+    height: 2.5rem;
+    border: 0.5px solid $md-grey;
+    cursor: pointer;
+    &:hover {
+      border: 0.5px solid $primary-hover;
+    }
+  }
+  .open {
+    height: auto;
+  }
+}
+
+.statusWrapper {
+  display: flex;
+  // justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding-right: 1rem;
+
+  li {
+    margin-block: 0.5rem;
+    padding-left: 1rem;
+  }
+}

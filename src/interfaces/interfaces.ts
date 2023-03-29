@@ -10,10 +10,15 @@ export interface Column {
   tasks: Task[];
 }
 
+export interface Modal extends Task {
+  type: string;
+}
+
 export interface Task {
   title: string;
   description: string;
-  subtasks: Subtask[];
+  subtasks?: Subtask[];
+  changeToggle?: (state: boolean) => void;
 }
 
 export interface Subtask {
@@ -35,6 +40,11 @@ export interface SelectBoard {
   index: number;
   total?: number;
   toggle?: boolean;
+}
+
+export interface Toggle {
+  changeToggle: (state: boolean) => void;
+  current?: boolean;
 }
 
 // export enum Status {

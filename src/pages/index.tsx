@@ -5,6 +5,7 @@ import boards from "../db/table.json";
 import { useState } from "react";
 import BoardSelection from "@/components/BoardSelection";
 import SelectedBoard from "@/components/SelectedBoard";
+import TaskCard from "@/components/TaskCard";
 
 export default function Home() {
   const [currentBoardIndex, setCurrentBoardIndex] = useState<number>(0);

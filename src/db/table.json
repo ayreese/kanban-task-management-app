@@ -8,12 +8,21 @@
         "color": "salmon",
         "tasks": [
           {
-            "title": "Test before peer review",
-            "description": "Test using jest",
+            "title": "Research pricing points of various competitors and trial different business models",
+            "description": "We know what we're planning to build for version one. Now we need to finalize the first pricing model we'll use. Keep iterating the subtasks until we have a coherent proposition.",
+            "status": "todo",
             "subtasks": [
               {
-                "name": "Add to monthly review sheet",
+                "name": "Research competitor pricing and business models",
                 "status": "completed"
+              },
+              {
+                "name": "Outline a business model that works for our solution",
+                "status": "incomplete"
+              },
+              {
+                "name": "Talk to potential customers about our proposed solution and ask for fair price expectancy",
+                "status": "incomplete"
               }
             ]
           }
@@ -26,10 +35,11 @@
           {
             "title": "Start API",
             "description": "Build endpoints for new internal tool",
+            "status": "in progress",
             "subtasks": [
               {
                 "name": "test with postman",
-                "status": "completed"
+                "status": "todo"
               },
               {
                 "name": "test with postman",
@@ -44,6 +54,7 @@
           {
             "title": "Start API",
             "description": "Build endpoints for new internal tool",
+            "status": "in progress",
             "subtasks": [
               {
                 "name": "test with postman",
@@ -68,6 +79,7 @@
           {
             "title": "Build UI",
             "description": "Build UI for new internal tool",
+            "status": "completed",
             "subtasks": [
               {
                 "name": "get budget from client",

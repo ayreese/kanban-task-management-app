@@ -4,6 +4,9 @@ import { BoardSelection } from "@/interfaces/interfaces";
 import darkSwitch from "public/assets/icon-dark-theme.svg";
 import lightSwitch from "public/assets/icon-light-theme.svg";
 
+/*
+Board selection is the right side of the screen
+*/
 const BoardSelection = ({
   toggle,
   boards,
@@ -11,6 +14,7 @@ const BoardSelection = ({
   getBoard,
   setBoard,
 }: BoardSelection) => {
+  // counts total boards
   const total = boards.length;
   return (
     <div className={`boardSelectionArea ${toggle ? "" : "hide"}`}>
