@@ -3,13 +3,23 @@ import Image from "next/image";
 import menu from "public/assets/icon-vertical-ellipsis.svg";
 import Columns from "./Columns";
 import { SelectBoard as _SelectBoard } from "@/interfaces/interfaces";
-import TaskCard from "./TaskCard";
+import MenuModal from "./Modal";
 
 const SelectedBoard = ({ boards, index, total, toggle }: _SelectBoard) => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
+  const checkHandler = () => {
+    setUser(!user);
+  };
   return (
     <div className="selectedBoardArea">
-      {/* {user && <TaskCard title="title" description="description" />} */}
+      {user && (
+        <MenuModal
+          type="login"
+          title="title"
+          description="description"
+          changeToggle={checkHandler}
+        />
+      )}
       <div className="selectedBoardOptionsWrapper">
         <p className="selectedBoardNameXl">
           {user ? boards[index].name : "welcome to kanban"}
@@ -24,7 +34,9 @@ const SelectedBoard = ({ boards, index, total, toggle }: _SelectBoard) => {
             </>
           ) : (
             <>
-              <button className="newTaskBtn">Login</button>
+              <button onClick={checkHandler} className="newTaskBtn">
+                Login
+              </button>
             </>
           )}
         </div>

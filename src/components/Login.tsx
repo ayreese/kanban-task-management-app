@@ -1,74 +1,33 @@
 import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Inputs } from "@/interfaces/interfaces";
 
 const Login = () => {
-  const [formState, setFormState] = useState({
-    login: true,
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+  console.log(watch("email")); // watch input value by passing the name of it
 
   return (
-    <div>
-      <h4 className="mv3">{formState.login ? "Login" : "Sign Up"}</h4>
-      <div className="flex flex-column">
-        {!formState.login && (
-          <input
-            value={formState.firstName}
-            onChange={(e) =>
-              setFormState({
-                ...formState,
-                firstName: e.target.value,
-              })
-            }
-            type="text"
-            placeholder="Your name"
-          />
-        )}
-        <input
-          value={formState.email}
-          onChange={(e) =>
-            setFormState({
-              ...formState,
-              email: e.target.value,
-            })
-          }
-          type="text"
-          placeholder="Your email address"
-        />
-        <input
-          value={formState.password}
-          onChange={(e) =>
-            setFormState({
-              ...formState,
-              password: e.target.value,
-            })
-          }
-          type="password"
-          placeholder="Choose a safe password"
-        />
-      </div>
-      <div className="flex mt3">
-        <button
-          className="pointer mr2 button"
-          onClick={() => console.log("onClick")}>
-          {formState.login ? "login" : "create account"}
-        </button>
-        <button
-          className="pointer button"
-          onClick={(e) =>
-            setFormState({
-              ...formState,
-              login: !formState.login,
-            })
-          }>
-          {formState.login
-            ? "need to create an account?"
-            : "already have an account?"}
-        </button>
-      </div>
-    </div>
+    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* register your input into the hook by invoking the "register" function */}
+      <input {...register("firstName")} />
+      <input {...register("lastName")} />
+      <input {...register("email", { required: true })} />
+      <input {...register("password", { required: true })} />
+
+      {/* errors will return when field validation fails  */}
+      {errors.email && <span>This field is required</span>}
+      {errors.password && <span>This field is required</span>}
+
+      <input type="submit" />
+    </form>
   );
 };
 

@@ -47,6 +47,13 @@ export interface Toggle {
   current?: boolean;
 }
 
+export interface Inputs {
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  password: string;
+}
+
 // export enum Status {
 //   completed,
 //   incomplete,
