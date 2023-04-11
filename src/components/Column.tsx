@@ -10,13 +10,15 @@ const Column = ({ name, color, tasks }: column) => {
         <p className="statusName">{name}</p>
       </div>
 
-      {tasks.map((task) => (
-        <Task
-          title={task.title}
-          description={task.description}
-          subtasks={task.subtasks}
-        />
-      ))}
+      {tasks &&
+        tasks.map((task, index) => (
+          <Task
+            key={index}
+            title={task.title}
+            description={task.description}
+            subtasks={task.subtasks}
+          />
+        ))}
     </div>
   );
 };

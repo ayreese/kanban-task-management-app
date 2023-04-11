@@ -1,5 +1,5 @@
-export interface Boards {
-  id: number;
+export interface Board {
+  id: string;
   name: string;
   columns: Column[];
 }
@@ -7,7 +7,7 @@ export interface Boards {
 export interface Column {
   name: string;
   color?: string;
-  tasks: Task[];
+  tasks?: Task[];
 }
 
 export interface Modal extends Task {
@@ -15,8 +15,8 @@ export interface Modal extends Task {
 }
 
 export interface Task {
-  title: string;
-  description: string;
+  name: string;
+  body?: string;
   subtasks?: Subtask[];
   changeToggle?: (state: boolean) => void;
 }
@@ -26,20 +26,16 @@ export interface Subtask {
   status: string;
 }
 
-export interface BoardSelection {
-  toggle?: boolean;
-  boards: Boards[];
-  index: number;
-  total?: number;
-  getBoard: (id: number) => void;
-  setBoard: (state: boolean) => void;
+export interface SelectBoard {
+  board: Board;
+  toggle: boolean;
+  total: number;
 }
 
-export interface SelectBoard {
-  boards: Boards[];
-  index: number;
-  total?: number;
-  toggle?: boolean;
+export interface BoardSelection {
+  boards: Board[];
+  toggle: boolean;
+  setBoardSelectionToggle: (state: boolean) => void;
 }
 
 export interface Toggle {
@@ -47,14 +43,17 @@ export interface Toggle {
   current?: boolean;
 }
 
-export interface Inputs {
+export interface Auth {
   firstName?: string;
   lastName?: string;
   email: string;
   password: string;
 }
 
-// export enum Status {
-//   completed,
-//   incomplete,
-// }
+export type CreateBoard = {
+  name: string;
+  columns: {
+    name: string;
+    color: string;
+  }[];
+};

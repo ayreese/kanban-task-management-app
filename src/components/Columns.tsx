@@ -1,15 +1,16 @@
 import React from "react";
 import Column from "./Column";
-import { Boards } from "../interfaces/interfaces";
+import { Board, Column as _Column } from "../interfaces/interfaces";
 
-const Columns = ({ id, name, columns }: Boards) => {
+const Columns = ({ columns }: { columns: _Column[] }) => {
   return (
     <>
       <div className="boardColumn">
-        {columns.map((column) => (
+        {columns.map((column, index) => (
           <Column
+            key={index}
             name={column.name}
-            color={column.color}
+            // color={column.color}
             tasks={column.tasks}
           />
         ))}

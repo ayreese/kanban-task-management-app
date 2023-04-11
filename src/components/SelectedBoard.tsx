@@ -1,59 +1,36 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import menu from "public/assets/icon-vertical-ellipsis.svg";
 import Columns from "./Columns";
 import { SelectBoard as _SelectBoard } from "@/interfaces/interfaces";
-import MenuModal from "./Modal";
+import { useQuery } from "@apollo/client";
+import { GET_BOARD } from "../graphql/query";
 
-const SelectedBoard = ({ boards, index, total, toggle }: _SelectBoard) => {
-  const [user, setUser] = useState(false);
-  const checkHandler = () => {
-    setUser(!user);
-  };
+const SelectedBoard = ({ board, toggle, total }: _SelectBoard) => {
   return (
     <div className="selectedBoardArea">
-      {user && (
-        <MenuModal
-          type="login"
-          title="title"
-          description="description"
-          changeToggle={checkHandler}
-        />
-      )}
       <div className="selectedBoardOptionsWrapper">
         <p className="selectedBoardNameXl">
-          {user ? boards[index].name : "welcome to kanban"}
+          {board ? board.name : "Create New Board"}
         </p>
         <div className="newTaskWrapper">
-          {user ? (
-            <>
-              <button className="newTaskBtn">+ add new task</button>
-              <button className="menuBtn">
-                <Image src={menu} alt="menu" />
-              </button>
-            </>
-          ) : (
-            <>
-              <button onClick={checkHandler} className="newTaskBtn">
-                Login
-              </button>
-            </>
-          )}
+          <>
+            <button className="newTaskBtn">+ add new task</button>
+            <button className="menuBtn">
+              <Image src={menu} alt="menu" />
+            </button>
+          </>
         </div>
       </div>
+      {/* toggle boolean is used to select class to move board */}
       <div className={`boardColumnsWrapper ${toggle ? "" : "hide2"}`}>
         {total === 0 ? (
           <div className="createNewBoardWrapper">
             <p>This board is empty create a new column to get started.</p>
-            <button className="createNewBoardBtn"> add new board</button>
+            {/* <button className="createNewBoardBtn"> add new board</button> */}
           </div>
         ) : (
-          // <></>
-          <Columns
-            id={boards[index].id}
-            name={boards[index].name}
-            columns={boards[index].columns}
-          />
+          <Columns columns={board.columns} />
         )}
       </div>
     </div>

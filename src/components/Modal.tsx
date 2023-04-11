@@ -5,13 +5,7 @@ import { Modal as _Task } from "@/interfaces/interfaces";
 import TaskCard from "./TaskCard";
 import Login from "./Login";
 
-const MenuModal = ({
-  type,
-  title,
-  description,
-  subtasks,
-  changeToggle,
-}: _Task) => {
+const MenuModal = ({ type, name, body, subtasks, changeToggle }: _Task) => {
   const [completed, setCompleted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,7 +30,6 @@ const MenuModal = ({
           changeToggle={changeToggle}
         />
       )}
-      {type === "login" && <Login />}
     </div>
   );
 };

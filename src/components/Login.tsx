@@ -1,33 +1,58 @@
-import React, { useState } from "react";
+import { useMutation } from "@apollo/client";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Inputs } from "@/interfaces/interfaces";
+import { Auth as _Auth } from "@/interfaces/interfaces";
+import { setCookie } from "cookies-next";
+import { LOGIN_MUTATION } from "@/graphql/mutations";
+import { client } from "apollo-client";
 
 const Login = () => {
+  /* GraphQl mutation to login */
+  const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION);
+  /* React-hook-form hook to create form */
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
-  console.log(watch("email")); // watch input value by passing the name of it
-
+  } = useForm<_Auth>();
+  /* Function to handle data after form submission */
+  const onSubmit: SubmitHandler<_Auth> = async (data) => {
+    /* Graphql function using the form data for mutation */
+    login({
+      variables: {
+        email: data.email,
+        password: data.password,
+      },
+    })
+      .then((newData) => {
+        setCookie("auth", newData.data.login.token);
+        client.refetchQueries({ include: "all" });
+      })
+      .catch((error) => {
+        console.log("failed error", error);
+      });
+  };
+  /* JSX return value */
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {/* register your input into the hook by invoking the "register" function */}
-      <input {...register("firstName")} />
-      <input {...register("lastName")} />
-      <input {...register("email", { required: true })} />
-      <input {...register("password", { required: true })} />
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className="form">
+        <h1>login</h1>
 
-      {/* errors will return when field validation fails  */}
-      {errors.email && <span>This field is required</span>}
-      {errors.password && <span>This field is required</span>}
+        <input
+          type="text"
+          {...register("email", { required: true })}
+          placeholder="Email"
+        />
+        <input
+          {...register("password", { required: true })}
+          placeholder="Password"
+        />
 
-      <input type="submit" />
-    </form>
+        {errors.email && <span>This field is required</span>}
+        {errors.password && <span>This field is required</span>}
+
+        <input type="submit" value="Submit" />
+      </form>
+    </>
   );
 };
 
