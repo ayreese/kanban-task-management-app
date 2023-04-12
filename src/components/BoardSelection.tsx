@@ -4,7 +4,6 @@ import { Board, BoardSelection } from "@/interfaces/interfaces";
 import darkSwitch from "public/assets/icon-dark-theme.svg";
 import lightSwitch from "public/assets/icon-light-theme.svg";
 import SelectedBoard from "./SelectedBoard";
-import MenuModal from "./Modal";
 import CreationModal from "./CreationModal";
 
 /*
@@ -18,7 +17,7 @@ const BoardSelection = ({
   /* counts total boards */
   const [total, setTotal] = useState<number>(0);
   /* state for modal to open to create new board*/
-  const [createNewBoard, setCreateNewBoard] = useState<boolean>(false);
+  const [modalToggle, setModalToggle] = useState<boolean>(false);
   /* state for current board */
   const [currentBoard, setCurrentBoard] = useState<Board>({
     id: "",
@@ -76,7 +75,7 @@ const BoardSelection = ({
                     fill="#635FC7"
                   />
                 </svg>
-                <button onClick={() => setCreateNewBoard(!createNewBoard)}>
+                <button onClick={() => setModalToggle(!modalToggle)}>
                   + create new board
                 </button>
               </li>
@@ -107,7 +106,13 @@ const BoardSelection = ({
       </div>
 
       <SelectedBoard board={currentBoard} toggle={toggle} total={total} />
-      {createNewBoard && <CreationModal />}
+      {modalToggle && (
+        <CreationModal
+          setCurrentBoard={setCurrentBoard}
+          setModalToggle={setModalToggle}
+          modalToggle={modalToggle}
+        />
+      )}
     </>
   );
 };

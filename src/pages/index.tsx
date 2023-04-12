@@ -6,25 +6,29 @@ import BoardSelection from "@/components/BoardSelection";
 import { hasCookie } from "cookies-next";
 import Auth from "@/components/Auth";
 import { GET_BOARDS } from "@/graphql/query";
-import { useMutation, useQuery } from "@apollo/client";
-import { CREATE_BOARD } from "@/graphql/mutations";
+import { useQuery } from "@apollo/client";
 
 export default function Home() {
   const {
     loading: queryLoading,
     error: queryError,
     data: queryData,
+    refetch: queryRefetch,
   } = useQuery(GET_BOARDS);
-  const [
-    createBoard,
-    { loading: mutationLoading, error: mutationError, data: mutationData },
-  ] = useMutation(CREATE_BOARD);
+  // const [
+  //   createBoard,
+  //   { loading: mutationLoading, error: mutationError, data: mutationData },
+  // ] = useMutation(CREATE_BOARD);
   const [isCookie, setIsCookie] = useState<boolean>(false);
   const [boardSelectToggle, setSelectToggle] = useState<boolean>(true);
 
   useEffect(() => {
     setIsCookie(hasCookie("auth"));
   }, [queryLoading]);
+
+  useEffect(() => {
+    setIsCookie(hasCookie("auth"));
+  }, [hasCookie("auth")]);
 
   if (queryLoading) return <>Loading...</>;
 

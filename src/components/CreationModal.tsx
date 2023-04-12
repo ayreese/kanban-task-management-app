@@ -5,17 +5,29 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { CreateBoard } from "@/interfaces/interfaces";
 import { CREATE_BOARD } from "@/graphql/mutations";
 import { useEffect } from "react";
-import { client } from "apollo-client";
+import { GET_BOARDS } from "@/graphql/query";
 
 /*
 Abbreviations
 React-hook-form = RHF
 */
+interface selectBoard {
+  setCurrentBoard: (state: any) => void;
+  modalToggle: boolean;
+  setModalToggle: (state: any) => void;
+}
 
 /* General component to create new items e.g. boards, tasks */
-const CreationModal = () => {
+const CreationModal = ({
+  setCurrentBoard,
+  modalToggle,
+  setModalToggle,
+}: selectBoard) => {
   /* GraphQl mutation to create boards */
-  const [createBoard, { data, loading, error }] = useMutation(CREATE_BOARD);
+  const [
+    createBoard,
+    { data: mutationData, loading: mutationLoading, error: mutationError },
+  ] = useMutation(CREATE_BOARD);
   /* React-hook-form hook to create form */
   const {
     register,
@@ -33,8 +45,6 @@ const CreationModal = () => {
     control,
   });
 
-  useEffect(() => {}, []);
-
   /* Function to handle data after form submission */
   const onSubmit: SubmitHandler<CreateBoard> = async (data: CreateBoard) => {
     try {
@@ -43,10 +53,12 @@ const CreationModal = () => {
           name: data.name,
           columns: data.columns,
         },
+        refetchQueries: [{ query: GET_BOARDS }],
+        onCompleted(data) {
+          setModalToggle(!modalToggle);
+          setCurrentBoard(data.createBoard);
+        },
       });
-      client.refetchQueries({ include: "all" });
-      console.log("result", result);
-      window.location.reload();
     } catch (error) {
       console.error("Error creating board:", error);
     }
@@ -55,7 +67,7 @@ const CreationModal = () => {
   return (
     <div className="taskCardContainer">
       <div className="closeBtn">
-        <button onClick={close}>X</button>
+        <button onClick={() => setModalToggle(!modalToggle)}>X</button>
       </div>
       <div className="taskCardWrapper">
         <div className="taskAndMenuContainer">
