@@ -5,9 +5,11 @@ export interface Board {
 }
 
 export interface Column {
+  id: string;
   name: string;
   color?: string;
   tasks?: Task[];
+  columns: any[];
 }
 
 export interface Modal extends Task {
@@ -19,6 +21,7 @@ export interface Task {
   body?: string;
   subtasks?: Subtask[];
   changeToggle?: (state: boolean) => void;
+  columns: any[];
 }
 
 export interface Subtask {
@@ -57,3 +60,20 @@ export type CreateBoard = {
     color: string;
   }[];
 };
+
+export interface CreateColumn {
+  name: string;
+  color: string;
+}
+
+export interface CreateTask {
+  name: string;
+  body: string;
+  columnId: string;
+}
+
+export interface CreateColumnProps {
+  currentBoard: Board;
+  modalToggle: boolean;
+  setModalToggle: (state: any) => void;
+}

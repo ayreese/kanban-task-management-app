@@ -2,11 +2,14 @@ import React from "react";
 import Task from "./Task";
 import { Column as column } from "@/interfaces/interfaces";
 
-const Column = ({ name, color, tasks }: column) => {
+const Column = ({ name, color, tasks, columns }: column) => {
+  console.log("This is the color", color);
   return (
     <div className="columnWrapper">
       <div className="statusWrapper">
-        <div className={`statusColor ${color}`}></div>
+        <div
+          className={`statusColor ${color}`}
+          style={{ backgroundColor: `${color}` }}></div>
         <p className="statusName">{name}</p>
       </div>
 
@@ -14,9 +17,10 @@ const Column = ({ name, color, tasks }: column) => {
         tasks.map((task, index) => (
           <Task
             key={index}
-            title={task.title}
-            description={task.description}
+            name={task.name}
+            body={task.body}
             subtasks={task.subtasks}
+            columns={columns}
           />
         ))}
     </div>

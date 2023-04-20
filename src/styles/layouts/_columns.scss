@@ -3,13 +3,27 @@
 
 .boardColumn {
   display: flex;
-  // grid-template-columns: repeat(auto-fill, 250px);
   gap: $sm-space;
   padding: $sm-space;
 }
 
 .boardColumnsWrapper {
+  grid-area: selectedBoardArea2;
   transition: 0.5s;
+  overflow: auto;
+  width: 100%;
+  height: 100vh;
+
+  &.hide2 {
+    // transition: 0.5s;
+    grid-column: 1 / span 2;
+    overflow: auto;
+    padding-left: 4.9rem;
+    padding-right: 1rem;
+  }
+  @media screen and (max-width: 750px) {
+    transition: 0;
+  }
 }
 
 .newColumnButtonWrapper {
@@ -26,11 +40,16 @@
   }
 }
 
+.columnWrapper {
+  min-width: 18rem;
+}
+
 .statusWrapper {
   display: flex;
   gap: $sm-space - 0.5;
   margin-bottom: $sm-space;
   width: fit-content;
+  cursor: pointer;
   .statusColor {
     border-radius: 50%;
     height: 1rem;

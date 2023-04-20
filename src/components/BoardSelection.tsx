@@ -1,10 +1,18 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import menu from "public/assets/icon-vertical-ellipsis.svg";
+
+import logoInBlack from "public/assets/logo-dark.svg";
+import mobileLogo from "public/assets/logo-mobile.svg";
+import down from "public/assets/icon-chevron-down.svg";
 import { Board, BoardSelection } from "@/interfaces/interfaces";
 import darkSwitch from "public/assets/icon-dark-theme.svg";
 import lightSwitch from "public/assets/icon-light-theme.svg";
 import SelectedBoard from "./SelectedBoard";
-import CreationModal from "./CreationModal";
+import CreateBoard from "./CreateBoard";
+import Columns from "./Columns";
+import TaskCard from "./TaskCard";
+import CreateTask from "./CreateTask";
 
 /*
 Board selection is the right side of the screen
@@ -17,7 +25,9 @@ const BoardSelection = ({
   /* counts total boards */
   const [total, setTotal] = useState<number>(0);
   /* state for modal to open to create new board*/
-  const [modalToggle, setModalToggle] = useState<boolean>(false);
+  const [newBoardModal, setNewBoardModal] = useState<boolean>(false);
+  /* state for modal to open to create new task*/
+  const [newTaskModal, setNewTaskModal] = useState<boolean>(false);
   /* state for current board */
   const [currentBoard, setCurrentBoard] = useState<Board>({
     id: "",
@@ -33,7 +43,34 @@ const BoardSelection = ({
   }, [...boards]);
 
   return (
-    <>
+    <div className="boardContainerGrid">
+      <div className="logoArea">
+        <Image src={logoInBlack} alt="logo" />
+      </div>
+      <div className="selectedBoardOptionsWrapper">
+        <div className="mobileLogoWrapper">
+          <Image src={mobileLogo} alt="logo" className="mobileLogo" />
+          <p className="selectedBoardNameXl">
+            {currentBoard ? currentBoard.name : "Create New Board"}
+          </p>
+          <Image
+            src={down}
+            alt="down-arrow"
+            className="downArrow"
+            onClick={() => setBoardSelectionToggle(!toggle)}
+          />
+        </div>
+        <div className="newTaskWrapper">
+          <button
+            className="newTaskBtn"
+            onClick={() => setNewTaskModal(!newTaskModal)}>
+            + <p>add new task</p>
+          </button>
+          <button className="menuBtn">
+            <Image src={menu} alt="menu" />
+          </button>
+        </div>
+      </div>
       <div className={`boardSelectionArea ${toggle ? "" : "hide"}`}>
         <div className="boardSelectionWrapper">
           <p className="allBoardsMdBody">all boards ({total})</p>
@@ -75,7 +112,7 @@ const BoardSelection = ({
                     fill="#635FC7"
                   />
                 </svg>
-                <button onClick={() => setModalToggle(!modalToggle)}>
+                <button onClick={() => setNewBoardModal(!newBoardModal)}>
                   + create new board
                 </button>
               </li>
@@ -97,7 +134,9 @@ const BoardSelection = ({
                   fill={toggle ? "#828FA3" : "#fff"}
                 />
               </svg>
-              <button onClick={() => setBoardSelectionToggle(!toggle)}>
+              <button
+                onClick={() => setBoardSelectionToggle(!toggle)}
+                className={`${toggle ? "" : "button"}`}>
                 hide sidebar
               </button>
             </div>
@@ -105,15 +144,32 @@ const BoardSelection = ({
         </div>
       </div>
 
-      <SelectedBoard board={currentBoard} toggle={toggle} total={total} />
-      {modalToggle && (
-        <CreationModal
-          setCurrentBoard={setCurrentBoard}
-          setModalToggle={setModalToggle}
-          modalToggle={modalToggle}
+      <div className={`boardColumnsWrapper ${toggle ? "" : "hide2"}`}>
+        {total === 0 ? (
+          <div className="createNewBoardWrapper">
+            <p>This board is empty create a new column to get started.</p>
+            {/* <button className="createNewBoardBtn"> add new board</button> */}
+          </div>
+        ) : (
+          <Columns board={currentBoard} />
+        )}
+      </div>
+
+      {newTaskModal && (
+        <CreateTask
+          currentBoard={currentBoard}
+          modalToggle={newTaskModal}
+          setModalToggle={setNewTaskModal}
         />
       )}
-    </>
+      {newBoardModal && (
+        <CreateBoard
+          setCurrentBoard={setCurrentBoard}
+          modalToggle={newBoardModal}
+          setModalToggle={setNewBoardModal}
+        />
+      )}
+    </div>
   );
 };
 

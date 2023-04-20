@@ -39,3 +39,30 @@ export const CREATE_BOARD = gql`
     }
   }
 `;
+
+export const CREATE_COLUMN = gql`
+  mutation CreateColumn($name: String!, $color: String!, $boardId: String) {
+    createColumn(name: $name, color: $color, boardId: $boardId) {
+      id
+      name
+      color
+      boardId
+      tasks {
+        id
+        name
+        body
+      }
+    }
+  }
+`;
+
+export const CREATE_TASK = gql`
+  mutation CreateTask($columnId: String, $name: String, $body: String) {
+    createTask(columnId: $columnId, name: $name, body: $body) {
+      id
+      name
+      body
+      columnId
+    }
+  }
+`;

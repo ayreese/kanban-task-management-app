@@ -6,9 +6,13 @@ export const GET_BOARDS = gql`
       id
       name
       columns {
+        id
         name
+        color
         tasks {
+          id
           name
+          body
         }
       }
     }
@@ -20,6 +24,7 @@ export const GET_BOARD = gql`
     board(id: $id) {
       name
       columns {
+        id
         name
         tasks {
           name

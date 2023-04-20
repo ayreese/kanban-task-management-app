@@ -2,19 +2,24 @@
 @use "../mixins" as *;
 
 .authPageContainer {
-  padding-top: 2.5rem;
-  padding-left: 2.5rem;
   font-family: $font-family;
   text-transform: uppercase;
+  height: 100vh;
+  overflow: hidden;
   p {
     margin-top: 1rem;
   }
 }
 
+.authTitleWrapper {
+  padding-top: 4rem;
+  padding-left: 4rem;
+}
+
 .authContainer {
   display: grid;
-  justify-items: center;
   font-family: $font-family;
+  overflow: hidden;
   margin-top: 10rem;
   h1 {
     font-weight: 500;
@@ -34,14 +39,20 @@
   padding: 2.5rem;
   background-color: white;
   border-radius: 1rem;
-  width: 100%;
+  width: min(1080px, 100% - 3rem);
+  max-width: 50rem;
+  margin-inline: auto;
+
   h1 {
     text-align: center;
   }
   input {
+    display: block;
     border: none;
     outline: none;
-    width: 50rem;
+    width: 100%;
+    max-width: 50rem;
+    margin-inline: auto;
     &:focus {
       outline: none;
     }
@@ -64,4 +75,23 @@
   letter-spacing: 3px;
   display: flex;
   gap: 1rem;
+  margin-inline: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .authTitleWrapper {
+    padding-top: 2rem;
+    padding-left: 2rem;
+  }
+  .authContainer {
+    margin-top: 2.5rem;
+  }
+  .selection {
+    gap: 0.1rem;
+    flex-direction: column;
+    text-align: center;
+  }
+  .form h1 {
+    font-size: 1.5rem;
+  }
 }

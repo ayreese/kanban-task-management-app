@@ -31,7 +31,7 @@
   margin: auto;
   inset: 0;
   width: min(720px, 100% - 3rem);
-  height: min(820px, 100% - 3rem);
+  // height: min(820px, 100% - 3rem);
   background-color: $white;
   padding: $md-space;
   border-radius: 6px;
@@ -114,15 +114,15 @@
   }
 }
 
-.statusWrapper {
-  display: flex;
-  // justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  padding-right: 1rem;
+// .statusWrapper {
+//   display: flex;
+//   // justify-content: space-around;
+//   align-items: center;
+//   width: 100%;
+//   padding-right: 1rem;
 
-  li {
-    margin-block: 0.5rem;
-    padding-left: 1rem;
-  }
-}
+//   li {
+//     margin-block: 0.5rem;
+//     padding-left: 1rem;
+//   }
+// }

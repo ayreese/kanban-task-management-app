@@ -15,10 +15,7 @@ export default function Home() {
     data: queryData,
     refetch: queryRefetch,
   } = useQuery(GET_BOARDS);
-  // const [
-  //   createBoard,
-  //   { loading: mutationLoading, error: mutationError, data: mutationData },
-  // ] = useMutation(CREATE_BOARD);
+
   const [isCookie, setIsCookie] = useState<boolean>(false);
   const [boardSelectToggle, setSelectToggle] = useState<boolean>(true);
 
@@ -51,16 +48,11 @@ export default function Home() {
           </Head>
           <main className="container">
             {isCookie ? (
-              <div className="boardContainerGrid">
-                <div className="logoArea">
-                  <Image src={logoInBlack} alt="logo" />
-                </div>
-                <BoardSelection
-                  boards={queryData.userBoards}
-                  toggle={boardSelectToggle}
-                  setBoardSelectionToggle={setSelectToggle}
-                />
-              </div>
+              <BoardSelection
+                boards={queryData.userBoards}
+                toggle={boardSelectToggle}
+                setBoardSelectionToggle={setSelectToggle}
+              />
             ) : (
               <>
                 <Auth />
@@ -84,16 +76,11 @@ export default function Home() {
       </Head>
       <main className="container">
         {isCookie ? (
-          <div className="boardContainerGrid">
-            <div className="logoArea">
-              <Image src={logoInBlack} alt="logo" />
-            </div>
-            <BoardSelection
-              boards={queryData.userBoards}
-              toggle={boardSelectToggle}
-              setBoardSelectionToggle={setSelectToggle}
-            />
-          </div>
+          <BoardSelection
+            boards={queryData.userBoards}
+            toggle={boardSelectToggle}
+            setBoardSelectionToggle={setSelectToggle}
+          />
         ) : (
           <>
             <Auth />

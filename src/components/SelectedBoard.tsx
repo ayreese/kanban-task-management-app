@@ -1,27 +1,30 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import menu from "public/assets/icon-vertical-ellipsis.svg";
 import Columns from "./Columns";
 import { SelectBoard as _SelectBoard } from "@/interfaces/interfaces";
-import { useQuery } from "@apollo/client";
-import { GET_BOARD } from "../graphql/query";
+import CreateTask from "./CreateTask";
 
 const SelectedBoard = ({ board, toggle, total }: _SelectBoard) => {
+  const [modalToggle, setModalToggle] = useState<boolean>(false);
+
   return (
     <div className="selectedBoardArea">
-      <div className="selectedBoardOptionsWrapper">
+      {/* <div className="selectedBoardOptionsWrapper">
         <p className="selectedBoardNameXl">
           {board ? board.name : "Create New Board"}
         </p>
         <div className="newTaskWrapper">
-          <>
-            <button className="newTaskBtn">+ add new task</button>
-            <button className="menuBtn">
-              <Image src={menu} alt="menu" />
-            </button>
-          </>
+          <button
+            className="newTaskBtn"
+            onClick={() => setModalToggle(!modalToggle)}>
+            + add new task
+          </button>
+          <button className="menuBtn">
+            <Image src={menu} alt="menu" />
+          </button>
         </div>
-      </div>
+      </div> */}
       {/* toggle boolean is used to select class to move board */}
       <div className={`boardColumnsWrapper ${toggle ? "" : "hide2"}`}>
         {total === 0 ? (
@@ -30,9 +33,16 @@ const SelectedBoard = ({ board, toggle, total }: _SelectBoard) => {
             {/* <button className="createNewBoardBtn"> add new board</button> */}
           </div>
         ) : (
-          <Columns columns={board.columns} />
+          <Columns board={board} />
         )}
       </div>
+      {modalToggle && (
+        <CreateTask
+          currentBoard={board}
+          modalToggle={modalToggle}
+          setModalToggle={setModalToggle}
+        />
+      )}
     </div>
   );
 };

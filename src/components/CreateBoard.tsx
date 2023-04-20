@@ -4,25 +4,24 @@ import { useMutation } from "@apollo/client";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { CreateBoard } from "@/interfaces/interfaces";
 import { CREATE_BOARD } from "@/graphql/mutations";
-import { useEffect } from "react";
 import { GET_BOARDS } from "@/graphql/query";
 
 /*
 Abbreviations
 React-hook-form = RHF
 */
-interface selectBoard {
+interface CreateBoardProps {
   setCurrentBoard: (state: any) => void;
   modalToggle: boolean;
   setModalToggle: (state: any) => void;
 }
 
 /* General component to create new items e.g. boards, tasks */
-const CreationModal = ({
+const CreateBoard = ({
   setCurrentBoard,
   modalToggle,
   setModalToggle,
-}: selectBoard) => {
+}: CreateBoardProps) => {
   /* GraphQl mutation to create boards */
   const [
     createBoard,
@@ -56,7 +55,11 @@ const CreationModal = ({
         refetchQueries: [{ query: GET_BOARDS }],
         onCompleted(data) {
           setModalToggle(!modalToggle);
-          setCurrentBoard(data.createBoard);
+          // setCurrentBoard(data.createBoard);
+          window.sessionStorage.setItem(
+            "currentBoard",
+            JSON.stringify(data.createBoard),
+          );
         },
       });
     } catch (error) {
@@ -104,4 +107,4 @@ const CreationModal = ({
   );
 };
 
-export default CreationModal;
+export default CreateBoard;

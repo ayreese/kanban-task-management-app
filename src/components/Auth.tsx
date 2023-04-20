@@ -14,8 +14,10 @@ const Auth = () => {
   };
   return (
     <div className="authPageContainer">
-      <Image src={logo} alt="light theme switch" />
-      <p>An app for managing task</p>
+      <div className="authTitleWrapper">
+        <Image src={logo} alt="light theme switch" />
+        <p>An app for managing task</p>
+      </div>
       <div className="authContainer">
         {/* <h1>{type}</h1> */}
         <div>{signUp ? <SignUp /> : <Login />}</div>
