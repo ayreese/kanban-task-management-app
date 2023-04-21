@@ -10,6 +10,7 @@ import { GET_BOARDS } from "@/graphql/query";
 Abbreviations
 React-hook-form = RHF
 */
+
 interface CreateBoardProps {
   setCurrentBoard: (state: any) => void;
   modalToggle: boolean;
@@ -68,37 +69,49 @@ const CreateBoard = ({
   };
   /* JSX return value */
   return (
-    <div className="taskCardContainer">
-      <div className="closeBtn">
-        <button onClick={() => setModalToggle(!modalToggle)}>X</button>
-      </div>
-      <div className="taskCardWrapper">
-        <div className="taskAndMenuContainer">
+    <div className="cardContainer" onClick={() => setModalToggle(!modalToggle)}>
+      <div
+        className="cardWrapper"
+        onClick={(e) => {
+          // do not close modal if anything inside modal content is clicked
+          e.stopPropagation();
+        }}>
+        <div className="menuContainer">
           <p>Create new board</p>
           <Image src={menu} alt={menu} />
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="createForm">
           <input {...register("name")} placeholder="Board Name" />
           {fields.map((fields, index) => {
             return (
               <div key={index}>
-                <input
-                  {...register(`columns.${index}.name`)}
-                  placeholder="column"
-                />
-                <input
-                  {...register(`columns.${index}.color`)}
-                  placeholder="color"
-                />
-                <button type="button" onClick={() => remove(index)}>
-                  x
-                </button>
+                <div className="columnInputContainer">
+                  <div className="columnInputWrapper">
+                    <input
+                      {...register(`columns.${index}.name`)}
+                      placeholder="column"
+                    />
+                    <input
+                      {...register(`columns.${index}.color`)}
+                      placeholder="color"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => remove(index)}
+                    className="closeBtn">
+                    x
+                  </button>
+                </div>
               </div>
             );
           })}
 
-          <button type="button" onClick={() => append({ name: "", color: "" })}>
-            add column
+          <button
+            type="button"
+            onClick={() => append({ name: "", color: "" })}
+            className="addBtn">
+            + add column
           </button>
           <input type="submit" value="Submit" />
         </form>

@@ -6,12 +6,14 @@ import { Task as _Task } from "@/interfaces/interfaces";
 const TaskCard = ({ name, body, subtasks, changeToggle, columns }: _Task) => {
   const close = () => changeToggle!(false);
   return (
-    <div className="taskCardContainer">
-      <div className="closeBtn">
-        <button onClick={close}>X</button>
-      </div>
-      <div className="taskCardWrapper">
-        <div className="taskAndMenuContainer">
+    <div className="cardContainer" onClick={close}>
+      <div
+        className="cardWrapper"
+        onClick={(e) => {
+          // do not close modal if anything inside modal content is clicked
+          e.stopPropagation();
+        }}>
+        <div className="menuContainer">
           <p>{name}</p>
           <Image src={menu} alt={menu} />
         </div>

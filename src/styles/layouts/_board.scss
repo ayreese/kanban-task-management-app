@@ -4,6 +4,7 @@
 .container {
   background-color: $light-bg;
   overflow: auto;
+  position: relative;
 }
 
 .boardContainerGrid {
@@ -15,7 +16,7 @@
     "boardSelectionArea selectedBoardArea2";
   column-gap: 0.3rem;
   width: 100%;
-  position: relative;
+  // position: relative;
 
   .logoArea {
     grid-area: logoArea;

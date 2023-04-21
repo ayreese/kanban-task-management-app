@@ -44,16 +44,18 @@ const CreateColumn = ({
   };
   /* JSX return value */
   return (
-    <div className="taskCardContainer">
-      <div className="closeBtn">
-        <button onClick={() => setModalToggle(!modalToggle)}>X</button>
-      </div>
-      <div className="taskCardWrapper">
-        <div className="taskAndMenuContainer">
-          <p>Create new board</p>
+    <div className="cardContainer" onClick={() => setModalToggle(!modalToggle)}>
+      <div
+        className="cardWrapper"
+        onClick={(e) => {
+          // do not close modal if anything inside modal content is clicked
+          e.stopPropagation();
+        }}>
+        <div className="menuContainer">
+          <p>Create new column</p>
           <Image src={menu} alt={menu} />
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="createForm">
           <input {...register("name")} placeholder="Column Name" />
           <input {...register("color")} placeholder="Color" />
 
