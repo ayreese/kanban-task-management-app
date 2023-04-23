@@ -28,7 +28,7 @@ const Login = () => {
         client.refetchQueries({ include: "all" });
       })
       .catch((error) => {
-        console.log("failed error", error);
+        console.error("failed error", error);
       });
   };
   /* JSX return value */

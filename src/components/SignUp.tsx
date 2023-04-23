@@ -17,10 +17,8 @@ const SignUp = () => {
   } = useForm<_Auth>();
 
   const onSubmit: SubmitHandler<_Auth> = (data) => {
-    console.log("This is the submit", isSubmitSuccessful);
     if (loading) return "loading";
     // if (error) return "You got a problem";
-    console.log(data);
     signUp({
       variables: {
         email: data.email,
@@ -32,10 +30,9 @@ const SignUp = () => {
       .then((newData) => {
         setCookie("auth", newData.data.signUp.token);
         client.refetchQueries({ include: "all" });
-        console.log("This is the submit", isSubmitSuccessful);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 

@@ -8,11 +8,13 @@ import down from "public/assets/icon-chevron-down.svg";
 import { Board, BoardSelection } from "@/interfaces/interfaces";
 import darkSwitch from "public/assets/icon-dark-theme.svg";
 import lightSwitch from "public/assets/icon-light-theme.svg";
-import SelectedBoard from "./SelectedBoard";
 import CreateBoard from "./CreateBoard";
 import Columns from "./Columns";
-import TaskCard from "./TaskCard";
 import CreateTask from "./CreateTask";
+import Menu from "./Menu";
+import EditBoard from "./EditBoard";
+import Confirmation from "./Confirmation";
+import { useCurrentBoard } from "@/context/useCurrentBoard";
 
 /*
 Board selection is the right side of the screen
@@ -28,6 +30,12 @@ const BoardSelection = ({
   const [newBoardModal, setNewBoardModal] = useState<boolean>(false);
   /* state for modal to open to create new task*/
   const [newTaskModal, setNewTaskModal] = useState<boolean>(false);
+  /* state for menu to open to edit and delete board */
+  const [menuToggle, setMenuToggle] = useState<boolean>(false);
+  /* state for modal to edit and delete board */
+  const [editBoard, setEditBoard] = useState<boolean>(false);
+  /* state for modal to edit and delete board */
+  const [confirmationToggle, setConfirmationToggle] = useState<boolean>(false);
   /* state for current board */
   const [currentBoard, setCurrentBoard] = useState<Board>({
     id: "",
@@ -38,8 +46,19 @@ const BoardSelection = ({
   useEffect(() => {
     if (boards) {
       setTotal(boards.length);
-      setCurrentBoard(boards[0]);
     }
+    console.log("Testing board selection component");
+  }, [...boards]);
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("currentBoard")) {
+      setCurrentBoard(
+        JSON.parse(window.sessionStorage.getItem("currentBoard")!),
+      );
+    } else if (boards) {
+      window.sessionStorage.setItem("currentBoard", JSON.stringify(boards[0]));
+    }
+    console.log("Testing board selection component");
   }, [...boards]);
 
   return (
@@ -66,9 +85,28 @@ const BoardSelection = ({
             onClick={() => setNewTaskModal(!newTaskModal)}>
             + <p>add new task</p>
           </button>
-          <button className="menuBtn">
+          <button
+            className="menuBtn"
+            onClick={() => setMenuToggle(!menuToggle)}>
             <Image src={menu} alt="menu" />
           </button>
+          {menuToggle && (
+            <Menu
+              modalToggle={menuToggle}
+              setModalToggle={setMenuToggle}
+              boardToggle={editBoard}
+              setBoardToggle={setEditBoard}
+              deleteToggle={confirmationToggle}
+              setDeleteToggle={setConfirmationToggle}
+            />
+          )}
+          {confirmationToggle && (
+            <Confirmation
+              currentBoard={currentBoard}
+              modalToggle={confirmationToggle}
+              setModalToggle={setConfirmationToggle}
+            />
+          )}
         </div>
       </div>
       <div className={`boardSelectionArea ${toggle ? "" : "hide"}`}>
@@ -96,6 +134,10 @@ const BoardSelection = ({
                     <button
                       onClick={() => {
                         setCurrentBoard(() => board);
+                        window.sessionStorage.setItem!(
+                          "currentBoard",
+                          JSON.stringify(board),
+                        );
                       }}>
                       {board.name}
                     </button>
@@ -164,9 +206,18 @@ const BoardSelection = ({
       )}
       {newBoardModal && (
         <CreateBoard
+          currentBoard={currentBoard}
           setCurrentBoard={setCurrentBoard}
           modalToggle={newBoardModal}
           setModalToggle={setNewBoardModal}
+        />
+      )}
+      {editBoard && (
+        <EditBoard
+          currentBoard={currentBoard}
+          setCurrentBoard={setCurrentBoard}
+          modalToggle={editBoard}
+          setModalToggle={setEditBoard}
         />
       )}
     </div>

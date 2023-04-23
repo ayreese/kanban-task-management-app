@@ -10,8 +10,6 @@ const Columns = ({ board }: { board: Board }) => {
   const [createTaskToggle, setCreateTaskToggle] = useState<boolean>(false);
 
   const { id, name, columns } = board;
-  console.log("This is columns", columns);
-
   return (
     <>
       <div className="boardColumn">

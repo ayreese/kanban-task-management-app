@@ -13,6 +13,11 @@ export const GET_BOARDS = gql`
           id
           name
           body
+          subtasks {
+            id
+            body
+            status
+          }
         }
       }
     }
@@ -27,8 +32,14 @@ export const GET_BOARD = gql`
         id
         name
         tasks {
+          id
           name
           body
+          subtasks {
+            id
+            body
+            status
+          }
         }
       }
     }

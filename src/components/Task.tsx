@@ -20,7 +20,7 @@ const Task = ({ name, body, subtasks, columns }: Task) => {
       )}
       <div className="task" onClick={checkHandler}>
         <p className="taskTitle">{name}</p>
-        <p className="subtaskCount">0 of 1 subtask</p>
+        <p className="subtaskCount">{`${subtasks?.length} subtask`}</p>
       </div>
     </div>
   );

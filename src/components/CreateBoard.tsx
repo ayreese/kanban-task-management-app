@@ -1,8 +1,6 @@
-import Image from "next/image";
-import menu from "public/assets/icon-vertical-ellipsis.svg";
 import { useMutation } from "@apollo/client";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { CreateBoard } from "@/interfaces/interfaces";
+import { CreateBoard, CreationProps } from "@/interfaces/interfaces";
 import { CREATE_BOARD } from "@/graphql/mutations";
 import { GET_BOARDS } from "@/graphql/query";
 
@@ -11,18 +9,12 @@ Abbreviations
 React-hook-form = RHF
 */
 
-interface CreateBoardProps {
-  setCurrentBoard: (state: any) => void;
-  modalToggle: boolean;
-  setModalToggle: (state: any) => void;
-}
-
 /* General component to create new items e.g. boards, tasks */
 const CreateBoard = ({
   setCurrentBoard,
   modalToggle,
   setModalToggle,
-}: CreateBoardProps) => {
+}: CreationProps) => {
   /* GraphQl mutation to create boards */
   const [
     createBoard,
@@ -55,9 +47,9 @@ const CreateBoard = ({
         },
         refetchQueries: [{ query: GET_BOARDS }],
         onCompleted(data) {
+          console.log("placement Test", data);
           setModalToggle(!modalToggle);
-          // setCurrentBoard(data.createBoard);
-          window.sessionStorage.setItem(
+          window.sessionStorage.setItem!(
             "currentBoard",
             JSON.stringify(data.createBoard),
           );
@@ -77,25 +69,31 @@ const CreateBoard = ({
           e.stopPropagation();
         }}>
         <div className="menuContainer">
-          <p>Create new board</p>
-          <Image src={menu} alt={menu} />
+          <p>Add new board</p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="createForm">
-          <input {...register("name")} placeholder="Board Name" />
+          <input
+            {...register("name", { required: true })}
+            placeholder="Board Name"
+          />
+          {errors.name && <span className="error">Board name is required</span>}
           {fields.map((fields, index) => {
             return (
               <div key={index}>
-                <div className="columnInputContainer">
-                  <div className="columnInputWrapper">
+                <div className="inputContainer">
+                  <div className="inputWrapper">
                     <input
-                      {...register(`columns.${index}.name`)}
+                      {...register(`columns.${index}.name`, { required: true })}
                       placeholder="column"
                     />
                     <input
-                      {...register(`columns.${index}.color`)}
+                      {...register(`columns.${index}.color`, {
+                        required: true,
+                      })}
                       placeholder="color"
                     />
                   </div>
+
                   <button
                     type="button"
                     onClick={() => remove(index)}
@@ -103,6 +101,11 @@ const CreateBoard = ({
                     x
                   </button>
                 </div>
+                {errors.columns && (
+                  <span className="error">
+                    Both column & color required or delete
+                  </span>
+                )}
               </div>
             );
           })}

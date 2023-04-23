@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export interface Board {
   id: string;
   name: string;
@@ -25,7 +27,8 @@ export interface Task {
 }
 
 export interface Subtask {
-  name: string;
+  id: string;
+  body: string;
   status: string;
 }
 
@@ -61,6 +64,10 @@ export type CreateBoard = {
   }[];
 };
 
+export type EditBoard = {
+  name: string;
+};
+
 export interface CreateColumn {
   name: string;
   color: string;
@@ -69,11 +76,30 @@ export interface CreateColumn {
 export interface CreateTask {
   name: string;
   body: string;
+  subtasks: {
+    body: string;
+  }[];
   columnId: string;
 }
 
-export interface CreateColumnProps {
+export interface CreateSubtask {
+  body: string;
+  status: string;
+  taskId: string;
+}
+
+export interface CreationProps {
   currentBoard: Board;
   modalToggle: boolean;
+  setCurrentBoard?: (state: any) => void;
   setModalToggle: (state: any) => void;
+}
+
+export interface MenuProps {
+  modalToggle: boolean;
+  setModalToggle: (state: any) => void;
+  boardToggle: boolean;
+  setBoardToggle: (state: any) => void;
+  deleteToggle: boolean;
+  setDeleteToggle: (state: any) => void;
 }

@@ -3,7 +3,6 @@ import Task from "./Task";
 import { Column as column } from "@/interfaces/interfaces";
 
 const Column = ({ name, color, tasks, columns }: column) => {
-  console.log("This is the color", color);
   return (
     <div className="columnWrapper">
       <div className="statusWrapper">

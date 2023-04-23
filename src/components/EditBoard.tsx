@@ -1,40 +1,57 @@
 import Image from "next/image";
 import menu from "public/assets/icon-vertical-ellipsis.svg";
 import { useMutation } from "@apollo/client";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { CREATE_COLUMN } from "@/graphql/mutations";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { EditBoard, CreationProps } from "@/interfaces/interfaces";
+import { CREATE_BOARD, EDIT_BOARD } from "@/graphql/mutations";
 import { GET_BOARDS } from "@/graphql/query";
-import { CreateColumn, CreationProps } from "@/interfaces/interfaces";
 
-const CreateColumn = ({
+/*
+Abbreviations
+React-hook-form = RHF
+*/
+
+/* General component to create new items e.g. boards, tasks */
+const EditBoard = ({
   currentBoard,
+  setCurrentBoard,
   modalToggle,
   setModalToggle,
 }: CreationProps) => {
   /* GraphQl mutation to create boards */
   const [
-    createColumn,
+    editBoard,
     { data: mutationData, loading: mutationLoading, error: mutationError },
-  ] = useMutation(CREATE_COLUMN);
+  ] = useMutation(EDIT_BOARD);
   /* React-hook-form hook to create form */
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
-  } = useForm<CreateColumn>({});
+  } = useForm<EditBoard>({
+    /* Default values need for field using useFieldArray from RHF */
+    defaultValues: {
+      name: currentBoard.name,
+    },
+  });
 
   /* Function to handle data after form submission */
-  const onSubmit: SubmitHandler<CreateColumn> = async (data: CreateColumn) => {
+  const onSubmit: SubmitHandler<EditBoard> = async (data: EditBoard) => {
     try {
-      await createColumn({
+      const result = await editBoard({
         variables: {
-          name: data.name,
-          color: data.color,
           boardId: currentBoard.id,
+          newName: data.name,
         },
         refetchQueries: [{ query: GET_BOARDS }],
         onCompleted(data) {
           setModalToggle(!modalToggle);
+          //   setCurrentBoard!(data.createBoard);
+          //   window.sessionStorage.setItem(
+          //     "currentBoard",
+          //     JSON.stringify(data.createBoard),
+          //   );
         },
       });
     } catch (error) {
@@ -51,12 +68,14 @@ const CreateColumn = ({
           e.stopPropagation();
         }}>
         <div className="menuContainer">
-          <p>Create new column</p>
+          <p>Edit board</p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="createForm">
-          <input {...register("name")} placeholder="Column Name" />
-          <input {...register("color")} placeholder="Color" />
-
+          <input
+            {...register("name", { required: true })}
+            placeholder="Board Name"
+          />
+          {errors.name && <span className="error">Board name is required</span>}
           <input type="submit" value="Submit" />
         </form>
       </div>
@@ -64,4 +83,4 @@ const CreateColumn = ({
   );
 };
 
-export default CreateColumn;
+export default EditBoard;

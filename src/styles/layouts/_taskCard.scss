@@ -12,6 +12,46 @@
   cursor: pointer;
 }
 
+.confirmationWrapper {
+  display: grid;
+  gap: 1rem;
+}
+.confirmationTxt {
+  h3 {
+    color: $red;
+    font-family: $font-family;
+    margin-bottom: 1rem;
+  }
+  p {
+    font-family: $font-family;
+    color: $md-grey;
+    margin-bottom: 1rem;
+  }
+}
+
+.confirmationBtn {
+  display: flex;
+  gap: 0.5rem;
+  button {
+    @include btn;
+    width: 100%;
+  }
+  .deleteBtn {
+    color: $white;
+    background-color: $red;
+    &:hover {
+      background-color: $red-hover;
+    }
+    &:focus {
+      background-color: $red;
+    }
+  }
+  .cancelBtn {
+    color: $primary;
+    background-color: $light-bg;
+  }
+}
+
 .closeBtn {
   background: none;
   border: none;
@@ -59,6 +99,15 @@ select {
   font-family: $font-family;
   input {
     width: 100%;
+    padding-left: 0.5rem;
+    background: $white;
+    border: 1px solid rgba(130, 143, 163, 0.25);
+    border-radius: 4px;
+    padding-block: 0.5rem;
+    &:focus {
+      border: 1px solid $primary;
+      outline: none;
+    }
   }
   input[type="submit"] {
     border-radius: 1rem;
@@ -72,6 +121,19 @@ select {
     }
     &:focus {
       background-color: $primary;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    resize: none;
+    background: $white;
+    border: 1px solid rgba(130, 143, 163, 0.25);
+    border-radius: 4px;
+    padding-block: 0.5rem;
+    &:focus {
+      border: 1px solid $primary;
+      outline: none;
     }
   }
 
@@ -91,15 +153,18 @@ select {
       background-color: $primary-hover;
     }
   }
+  .error {
+    color: $red;
+  }
 }
 
-.columnInputContainer {
+.inputContainer {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.columnInputWrapper {
+.inputWrapper {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

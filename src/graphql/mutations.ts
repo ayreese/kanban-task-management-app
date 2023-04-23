@@ -40,6 +40,24 @@ export const CREATE_BOARD = gql`
   }
 `;
 
+export const EDIT_BOARD = gql`
+  mutation EditBoard($boardId: String!, $newName: String!) {
+    updateBoard(boardId: $boardId, newName: $newName) {
+      id
+      name
+    }
+  }
+`;
+
+export const DELETE_BOARD = gql`
+  mutation DeleteBoard($boardId: String!) {
+    deleteBoard(boardId: $boardId) {
+      id
+      name
+    }
+  }
+`;
+
 export const CREATE_COLUMN = gql`
   mutation CreateColumn($name: String!, $color: String!, $boardId: String) {
     createColumn(name: $name, color: $color, boardId: $boardId) {
