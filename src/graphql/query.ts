@@ -13,10 +13,12 @@ export const GET_BOARDS = gql`
           id
           name
           body
+          columnId
           subtasks {
             id
             body
             status
+            taskId
           }
         }
       }

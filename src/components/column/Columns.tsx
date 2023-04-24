@@ -2,8 +2,8 @@ import { useState } from "react";
 import CreateColumn from "./CreateColumn";
 
 import Column from "./Column";
-import { Board, Column as _Column } from "../interfaces/interfaces";
-import CreateTask from "./CreateTask";
+import { Board, Column as _Column } from "../../interfaces/interfaces";
+import CreateTask from "../task/CreateTask";
 
 const Columns = ({ board }: { board: Board }) => {
   const [createColumnToggle, setCreateColumnToggle] = useState<boolean>(false);

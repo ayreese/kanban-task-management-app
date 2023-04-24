@@ -75,12 +75,26 @@ export const CREATE_COLUMN = gql`
 `;
 
 export const CREATE_TASK = gql`
-  mutation CreateTask($columnId: String, $name: String, $body: String) {
-    createTask(columnId: $columnId, name: $name, body: $body) {
+  mutation CreateTask(
+    $name: String
+    $body: String
+    $subtasks: [SubtaskInputType]
+    $columnId: String
+  ) {
+    createTask(
+      name: $name
+      body: $body
+      subtasks: $subtasks
+      columnId: $columnId
+    ) {
       id
       name
       body
-      columnId
+      subtasks {
+        id
+        body
+        status
+      }
     }
   }
 `;

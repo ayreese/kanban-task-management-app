@@ -2,7 +2,7 @@ import { DELETE_BOARD } from "@/graphql/mutations";
 import { Board, CreationProps, MenuProps } from "@/interfaces/interfaces";
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import EditBoard from "./EditBoard";
+import EditBoard from "./board/EditBoard";
 
 const Menu = ({
   modalToggle,

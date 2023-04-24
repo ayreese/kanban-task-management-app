@@ -30,7 +30,7 @@ const CreateTask = ({
   } = useForm<CreateTask>({
     /* Default values need for field using useFieldArray from RHF */
     defaultValues: {
-      subtasks: [{ body: "" }],
+      subtasks: [{ body: "", status: "INCOMPLETE" }],
     },
   });
   const { fields, append, remove } = useFieldArray({
@@ -40,12 +40,14 @@ const CreateTask = ({
 
   /* Function to handle data after form submission */
   const onSubmit: SubmitHandler<CreateTask> = async (data: CreateTask) => {
+    console.log("data", data);
     try {
       const result = await createTask({
         variables: {
+          columnId: data.columnId,
           name: data.name,
           body: data.body,
-          columnId: data.columnId,
+          subtasks: data.subtasks,
         },
         refetchQueries: [{ query: GET_BOARDS }],
         onCompleted(data) {
@@ -79,7 +81,7 @@ const CreateTask = ({
                   <div className="inputWrapper">
                     <input
                       {...register(`subtasks.${index}.body`)}
-                      placeholder="column"
+                      placeholder="subtask"
                     />
                   </div>
                   <button
@@ -92,7 +94,6 @@ const CreateTask = ({
               </div>
             );
           })}
-
           <select id="columnSelect" {...register("columnId")}>
             {currentBoard.columns.map((column) => {
               return (
@@ -102,11 +103,10 @@ const CreateTask = ({
               );
             })}
           </select>
-
           {
             <button
               type="button"
-              onClick={() => append({ body: "" })}
+              onClick={() => append({ body: "", status: "INCOMPLETE" })}
               className="addBtn">
               add subtasks
             </button>

@@ -2,9 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 import logoInBlack from "public/assets/logo-dark.svg";
 import { useEffect, useState } from "react";
-import BoardSelection from "@/components/BoardSelection";
+import BoardSelection from "@/components/board/BoardSelection";
 import { hasCookie } from "cookies-next";
-import Auth from "@/components/Auth";
+import Auth from "@/components/auth/Auth";
 import { GET_BOARDS } from "@/graphql/query";
 import { useQuery } from "@apollo/client";
 

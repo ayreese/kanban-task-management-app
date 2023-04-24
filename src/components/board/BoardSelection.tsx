@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import menu from "public/assets/icon-vertical-ellipsis.svg";
-
 import logoInBlack from "public/assets/logo-dark.svg";
 import mobileLogo from "public/assets/logo-mobile.svg";
 import down from "public/assets/icon-chevron-down.svg";
@@ -9,12 +8,11 @@ import { Board, BoardSelection } from "@/interfaces/interfaces";
 import darkSwitch from "public/assets/icon-dark-theme.svg";
 import lightSwitch from "public/assets/icon-light-theme.svg";
 import CreateBoard from "./CreateBoard";
-import Columns from "./Columns";
-import CreateTask from "./CreateTask";
-import Menu from "./Menu";
+import Columns from "../column/Columns";
+import CreateTask from "../task/CreateTask";
+import Menu from "../Menu";
 import EditBoard from "./EditBoard";
-import Confirmation from "./Confirmation";
-import { useCurrentBoard } from "@/context/useCurrentBoard";
+import Confirmation from "../Confirmation";
 
 /*
 Board selection is the right side of the screen

@@ -78,6 +78,7 @@ export interface CreateTask {
   body: string;
   subtasks: {
     body: string;
+    status: string;
   }[];
   columnId: string;
 }

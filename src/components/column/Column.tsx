@@ -1,5 +1,5 @@
 import React from "react";
-import Task from "./Task";
+import Task from "../task/Task";
 import { Column as column } from "@/interfaces/interfaces";
 
 const Column = ({ name, color, tasks, columns }: column) => {

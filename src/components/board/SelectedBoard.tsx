@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import menu from "public/assets/icon-vertical-ellipsis.svg";
-import Columns from "./Columns";
+import Columns from "../column/Columns";
 import { SelectBoard as _SelectBoard } from "@/interfaces/interfaces";
-import CreateTask from "./CreateTask";
+import CreateTask from "../task/CreateTask";
 
 const SelectedBoard = ({ board, toggle, total }: _SelectBoard) => {
   const [modalToggle, setModalToggle] = useState<boolean>(false);
