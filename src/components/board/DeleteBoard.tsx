@@ -3,11 +3,13 @@ import { GET_BOARDS } from "@/graphql/query";
 import { CreationProps } from "@/interfaces/interfaces";
 import { useMutation } from "@apollo/client";
 
-const Confirmation = ({
+const DeleteBoard = ({
+  boards,
   currentBoard,
   modalToggle,
   setModalToggle,
 }: CreationProps) => {
+  console.log(DELETE_BOARD);
   const [deleteBoard, { data: deletedData, loading, error }] =
     useMutation(DELETE_BOARD);
   const onDelete = async () => {
@@ -18,8 +20,10 @@ const Confirmation = ({
       refetchQueries: [{ query: GET_BOARDS }],
       onCompleted(data, clientOptions) {
         setModalToggle(!modalToggle);
-        console.log("client options", clientOptions);
-        console.log(data);
+        window.sessionStorage.setItem!(
+          "currentBoard",
+          JSON.stringify(boards && boards[0]),
+        );
       },
     });
   };
@@ -56,4 +60,4 @@ const Confirmation = ({
   );
 };
 
-export default Confirmation;
+export default DeleteBoard;

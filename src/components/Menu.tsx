@@ -1,33 +1,35 @@
-import { DELETE_BOARD } from "@/graphql/mutations";
-import { Board, CreationProps, MenuProps } from "@/interfaces/interfaces";
-import { useMutation } from "@apollo/client";
-import React, { useState } from "react";
-import EditBoard from "./board/EditBoard";
+import { MenuProps } from "@/interfaces/interfaces";
+
+/* 
+The menu UI component is composed of two buttons, 
+edit and delete used to toggle components 
+of the same name. The component takes three
+props to toggle state (see interfaces.ts) 
+*/
 
 const Menu = ({
-  modalToggle,
-  setModalToggle,
-  boardToggle,
-  setBoardToggle,
+  menuToggle,
+  editToggle,
   deleteToggle,
-  setDeleteToggle,
+  currentView,
 }: MenuProps) => {
-  const [openEdit, setOpenEdit] = useState(false);
-
+  console.log("current", editToggle?.state);
   return (
     <>
       <div className="menu">
         <button
           onClick={() => {
-            setBoardToggle(!boardToggle);
-            setModalToggle(!modalToggle);
+            editToggle.setState(!editToggle.state);
+            menuToggle.setState(!menuToggle.state);
+            currentView?.setState(!currentView!.state);
           }}>
           edit
         </button>
         <button
           onClick={() => {
-            setDeleteToggle(!deleteToggle);
-            setModalToggle(!modalToggle);
+            deleteToggle.setState(!deleteToggle.state);
+            menuToggle.setState(!menuToggle.state);
+            currentView?.setState(!currentView!.state);
           }}>
           delete
         </button>

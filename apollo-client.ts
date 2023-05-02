@@ -7,6 +7,20 @@ const httpLink = new HttpLink({
   credentials: "same-origin",
 });
 
+const cache: InMemoryCache = new InMemoryCache({
+  typePolicies: {
+    Board: {
+      fields: {
+        columns: {
+          merge(existing = [], incoming) {
+            return [...incoming];
+          },
+        },
+      },
+    },
+  },
+});
+
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = getCookie("auth");
@@ -22,5 +36,5 @@ const authLink = setContext((_, { headers }) => {
 
 export const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: cache,
 });

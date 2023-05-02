@@ -8,7 +8,6 @@ import CreateTask from "../task/CreateTask";
 const Columns = ({ board }: { board: Board }) => {
   const [createColumnToggle, setCreateColumnToggle] = useState<boolean>(false);
   const [createTaskToggle, setCreateTaskToggle] = useState<boolean>(false);
-
   const { id, name, columns } = board;
   return (
     <>
@@ -20,7 +19,6 @@ const Columns = ({ board }: { board: Board }) => {
             name={column.name}
             color={column.color}
             tasks={column.tasks}
-            columns={columns}
           />
         ))}
         <div className="newColumnButtonWrapper">

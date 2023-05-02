@@ -1,6 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
-import logoInBlack from "public/assets/logo-dark.svg";
 import { useEffect, useState } from "react";
 import BoardSelection from "@/components/board/BoardSelection";
 import { hasCookie } from "cookies-next";
@@ -28,41 +26,8 @@ export default function Home() {
   }, [hasCookie("auth")]);
 
   if (queryLoading) return <>Loading...</>;
+  if (queryError) console.log("We got this error", queryError);
 
-  if (queryError) {
-    const userNull = "Cannot read properties of null (reading 'userId')";
-    if (queryError.message === userNull) {
-      return (
-        <>
-          <Head>
-            <title>kanban task management app</title>
-            <meta
-              name="description"
-              content="The app that helps you get work done"
-            />
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1"
-            />
-            <link rel="icon" href="/public/assets/favicon-32x32.png" />
-          </Head>
-          <main className="container">
-            {isCookie ? (
-              <BoardSelection
-                boards={queryData.userBoards}
-                toggle={boardSelectToggle}
-                setBoardSelectionToggle={setSelectToggle}
-              />
-            ) : (
-              <>
-                <Auth />
-              </>
-            )}
-          </main>
-        </>
-      );
-    } else return queryError.message;
-  }
   return (
     <>
       <Head>
@@ -78,8 +43,7 @@ export default function Home() {
         {isCookie ? (
           <BoardSelection
             boards={queryData.userBoards}
-            toggle={boardSelectToggle}
-            setBoardSelectionToggle={setSelectToggle}
+            toggle={{ state: boardSelectToggle, setState: setSelectToggle }}
           />
         ) : (
           <>

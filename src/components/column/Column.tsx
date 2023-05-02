@@ -2,7 +2,7 @@ import React from "react";
 import Task from "../task/Task";
 import { Column as column } from "@/interfaces/interfaces";
 
-const Column = ({ name, color, tasks, columns }: column) => {
+const Column = ({ id, name, color, tasks }: column) => {
   return (
     <div className="columnWrapper">
       <div className="statusWrapper">
@@ -15,11 +15,13 @@ const Column = ({ name, color, tasks, columns }: column) => {
       {tasks &&
         tasks.map((task, index) => (
           <Task
+            id={task.id}
             key={index}
             name={task.name}
             body={task.body}
             subtasks={task.subtasks}
-            columns={columns}
+            columnId={id!}
+            columnName={name}
           />
         ))}
     </div>

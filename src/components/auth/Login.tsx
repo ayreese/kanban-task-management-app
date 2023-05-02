@@ -45,6 +45,7 @@ const Login = () => {
         <input
           {...register("password", { required: true })}
           placeholder="Password"
+          type="password"
         />
 
         {errors.email && <span>This field is required</span>}

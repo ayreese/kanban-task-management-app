@@ -41,10 +41,32 @@ export const CREATE_BOARD = gql`
 `;
 
 export const EDIT_BOARD = gql`
-  mutation EditBoard($boardId: String!, $newName: String!) {
-    updateBoard(boardId: $boardId, newName: $newName) {
+  mutation UpdateBoard(
+    $boardId: String!
+    $newName: String!
+    $columns: [ColumnInputType]
+  ) {
+    updateBoard(boardId: $boardId, newName: $newName, columns: $columns) {
       id
       name
+      columns {
+        boardId
+        id
+        name
+        color
+        tasks {
+          columnId
+          id
+          name
+          body
+          subtasks {
+            taskId
+            id
+            body
+            status
+          }
+        }
+      }
     }
   }
 `;
@@ -58,17 +80,45 @@ export const DELETE_BOARD = gql`
   }
 `;
 
+// export const CREATE_COLUMN = gql`
+//   mutation CreateColumn($name: String!, $color: String!, $boardId: String) {
+//     createColumn(name: $name, color: $color, boardId: $boardId) {
+//       id
+//       name
+//       color
+//       boardId
+//       tasks {
+//         id
+//         name
+//         body
+//       }
+//     }
+//   }
+// `;
+
 export const CREATE_COLUMN = gql`
   mutation CreateColumn($name: String!, $color: String!, $boardId: String) {
     createColumn(name: $name, color: $color, boardId: $boardId) {
       id
       name
-      color
-      boardId
-      tasks {
+      columns {
         id
         name
-        body
+        color
+      }
+    }
+  }
+`;
+
+export const DELETE_COLUMN = gql`
+  mutation DeleteColumn($boardId: String, $columnId: String) {
+    deleteColumn(boardId: $boardId, columnId: $columnId) {
+      id
+      name
+      columns {
+        id
+        name
+        color
       }
     }
   }
@@ -76,25 +126,108 @@ export const CREATE_COLUMN = gql`
 
 export const CREATE_TASK = gql`
   mutation CreateTask(
+    $boardId: String
+    $columnId: String
     $name: String
     $body: String
     $subtasks: [SubtaskInputType]
-    $columnId: String
   ) {
     createTask(
+      boardId: $boardId
+      columnId: $columnId
       name: $name
       body: $body
       subtasks: $subtasks
-      columnId: $columnId
     ) {
       id
       name
-      body
-      subtasks {
+      columns {
         id
-        body
-        status
+        name
+        color
+        tasks {
+          id
+          name
+          body
+          subtasks {
+            id
+            body
+            status
+          }
+        }
       }
+    }
+  }
+`;
+
+export const EDIT_TASK = gql`
+  mutation UpdateTask(
+    $boardId: String
+    $columnId: String
+    $taskId: String
+    $name: String
+    $body: String
+    $subtasks: [SubtaskInputType]
+  ) {
+    updateTask(
+      boardId: $boardId
+      columnId: $columnId
+      taskId: $taskId
+      name: $name
+      body: $body
+      subtasks: $subtasks
+    ) {
+      id
+      name
+      columns {
+        id
+        name
+        color
+        tasks {
+          id
+          name
+          body
+          subtasks {
+            id
+            body
+            status
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const DELETE_TASK = gql`
+  mutation DeleteTask($boardId: String, $columnId: String, $taskId: String!) {
+    deleteTask(boardId: $boardId, columnId: $columnId, taskId: $taskId) {
+      id
+      name
+      columns {
+        id
+        name
+        color
+        tasks {
+          id
+          name
+          body
+          subtasks {
+            id
+            body
+            status
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_SUBTASK = gql`
+  mutation UpdateSubtask($subtaskId: String, $status: Status) {
+    updateSubtask(subtaskId: $subtaskId, status: $status) {
+      id
+      status
+      body
     }
   }
 `;

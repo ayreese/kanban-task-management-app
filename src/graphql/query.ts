@@ -47,3 +47,14 @@ export const GET_BOARD = gql`
     }
   }
 `;
+
+export const GET_SUBTASKS = gql`
+  query Subtasks($taskId: String!) {
+    subtasks(taskId: $taskId) {
+      id
+      body
+      status
+      taskId
+    }
+  }
+`;

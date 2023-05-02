@@ -35,6 +35,11 @@ const CreateColumn = ({
         refetchQueries: [{ query: GET_BOARDS }],
         onCompleted(data) {
           setModalToggle(!modalToggle);
+          console.log("mutation data", data.createColumn);
+          window.sessionStorage.setItem!(
+            "currentBoard",
+            JSON.stringify(data.createColumn),
+          );
         },
       });
     } catch (error) {
@@ -47,7 +52,7 @@ const CreateColumn = ({
       <div
         className="cardWrapper"
         onClick={(e) => {
-          // do not close modal if anything inside modal content is clicked
+          // do not close modal if clicked
           e.stopPropagation();
         }}>
         <div className="menuContainer">

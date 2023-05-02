@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
-import { CreateBoard, CreationProps } from "@/interfaces/interfaces";
+import { Board, CreationProps } from "@/interfaces/interfaces";
 import { CREATE_BOARD } from "@/graphql/mutations";
 import { GET_BOARDS } from "@/graphql/query";
 
@@ -16,6 +16,7 @@ const CreateBoard = ({
   setModalToggle,
 }: CreationProps) => {
   /* GraphQl mutation to create boards */
+
   const [
     createBoard,
     { data: mutationData, loading: mutationLoading, error: mutationError },
@@ -26,7 +27,7 @@ const CreateBoard = ({
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<CreateBoard>({
+  } = useForm<Board>({
     /* Default values need for field using useFieldArray from RHF */
     defaultValues: {
       columns: [{ name: "", color: "" }],
@@ -34,11 +35,13 @@ const CreateBoard = ({
   });
   const { fields, append, remove } = useFieldArray({
     name: "columns",
+
     control,
   });
 
   /* Function to handle data after form submission */
-  const onSubmit: SubmitHandler<CreateBoard> = async (data: CreateBoard) => {
+  const onSubmit: SubmitHandler<Board> = async (data: Board) => {
+    console.log("sending", data);
     try {
       const result = await createBoard({
         variables: {
@@ -60,6 +63,7 @@ const CreateBoard = ({
     }
   };
   /* JSX return value */
+  if (mutationLoading) return <div>...Loading</div>;
   return (
     <div className="cardContainer" onClick={() => setModalToggle(!modalToggle)}>
       <div
