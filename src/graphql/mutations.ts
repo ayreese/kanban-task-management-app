@@ -80,22 +80,6 @@ export const DELETE_BOARD = gql`
   }
 `;
 
-// export const CREATE_COLUMN = gql`
-//   mutation CreateColumn($name: String!, $color: String!, $boardId: String) {
-//     createColumn(name: $name, color: $color, boardId: $boardId) {
-//       id
-//       name
-//       color
-//       boardId
-//       tasks {
-//         id
-//         name
-//         body
-//       }
-//     }
-//   }
-// `;
-
 export const CREATE_COLUMN = gql`
   mutation CreateColumn($name: String!, $color: String!, $boardId: String) {
     createColumn(name: $name, color: $color, boardId: $boardId) {
@@ -119,6 +103,16 @@ export const DELETE_COLUMN = gql`
         id
         name
         color
+        tasks {
+          id
+          name
+          body
+          subtasks {
+            id
+            body
+            status
+          }
+        }
       }
     }
   }
