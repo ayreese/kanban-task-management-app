@@ -48,15 +48,15 @@ const CreateBoard = ({
           name: data.name,
           columns: data.columns,
         },
-        refetchQueries: [{ query: GET_BOARDS }],
         onCompleted(data) {
-          console.log("placement Test", data);
+          console.log("placement Test", data.createBoard);
           setModalToggle(!modalToggle);
           window.sessionStorage.setItem!(
             "currentBoard",
             JSON.stringify(data.createBoard),
           );
         },
+        refetchQueries: [{ query: GET_BOARDS }],
       });
     } catch (error) {
       console.error("Error creating board:", error);

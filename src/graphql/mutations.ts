@@ -216,12 +216,72 @@ export const DELETE_TASK = gql`
   }
 `;
 
-export const UPDATE_SUBTASK = gql`
-  mutation UpdateSubtask($subtaskId: String, $status: Status) {
-    updateSubtask(subtaskId: $subtaskId, status: $status) {
+export const DELETE_SUBTASK = gql`
+  mutation DeleteSubtask(
+    $boardId: String
+    $columnId: String
+    $taskId: String
+    $subtaskId: String
+  ) {
+    deleteSubtask(
+      boardId: $boardId
+      columnId: $columnId
+      taskId: $taskId
+      subtaskId: $subtaskId
+    ) {
       id
-      status
-      body
+      name
+      columns {
+        id
+        name
+        color
+        tasks {
+          id
+          name
+          body
+          subtasks {
+            id
+            body
+            status
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const UPDATE_SUBTASK = gql`
+  mutation UpdateSubtask(
+    $boardId: String
+    $columnId: String
+    $taskId: String
+    $subtaskId: String
+    $status: Status
+  ) {
+    updateSubtask(
+      boardId: $boardId
+      columnId: $columnId
+      taskId: $taskId
+      subtaskId: $subtaskId
+      status: $status
+    ) {
+      id
+      name
+      columns {
+        id
+        name
+        color
+        tasks {
+          id
+          name
+          body
+          subtasks {
+            id
+            body
+            status
+          }
+        }
+      }
     }
   }
 `;

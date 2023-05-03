@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import menu from "public/assets/icon-vertical-ellipsis.svg";
 import {
@@ -12,6 +12,7 @@ import { GET_BOARDS, GET_SUBTASKS } from "@/graphql/query";
 import Menu from "../Menu";
 import EditTask from "./EditTask";
 import DeleteTask from "./DeleteTask";
+import { BoardContext } from "../board/BoardSelection";
 
 const TaskCard = ({
   id,
@@ -22,6 +23,8 @@ const TaskCard = ({
   columnId,
   taskCardOpen,
 }: TaskProps) => {
+  /*Current board from context */
+  const board = useContext(BoardContext);
   /* state for menu to open to edit and delete task */
   const [menuToggle, setMenuToggle] = useState<boolean>(false);
   /* state for modal to edit task */
@@ -42,23 +45,25 @@ const TaskCard = ({
   const [
     updateSubtask,
     { data: mutationData, loading: mutationLoading, error: mutationError },
-  ] = useMutation(UPDATE_SUBTASK, {
-    refetchQueries: [{ query: GET_BOARDS }],
-  });
+  ] = useMutation(UPDATE_SUBTASK);
   /* function that runs the GraphQL mutation */
   const updateSubtasks = (subtaskId: string, status: string) => {
-    console.log("1st loading", mutationLoading);
     try {
       updateSubtask({
         variables: {
+          boardId: board?.id,
+          columnId: columnId,
+          taskId: id,
           subtaskId: subtaskId,
           status: status,
         },
-        refetchQueries: [{ query: GET_SUBTASKS, variables: { taskId: id } }],
+        refetchQueries: [{ query: GET_SUBTASKS }],
         onCompleted(data, clientOptions) {
-          console.log("client options", clientOptions);
-          console.log("data", data);
-          console.log("2nd loading", mutationLoading);
+          // console.log("data", data.updateSubtask);
+          window.sessionStorage.setItem!(
+            "currentBoard",
+            JSON.stringify(data.updateSubtask),
+          );
         },
       });
     } catch (error) {
@@ -117,7 +122,7 @@ const TaskCard = ({
                         <input
                           type="checkbox"
                           name="status"
-                          checked
+                          checked={subtask.status === "COMPLETE"}
                           onChange={() =>
                             updateSubtasks(subtask.id!, "INCOMPLETE")
                           }

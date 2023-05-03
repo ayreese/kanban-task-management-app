@@ -12,6 +12,13 @@
   cursor: pointer;
 }
 
+.menuBtn {
+  border: none;
+  padding-inline: 1rem;
+  background: none;
+  cursor: pointer;
+}
+
 .confirmationWrapper {
   display: grid;
   gap: 1rem;
@@ -87,6 +94,8 @@ select {
   background-color: $white;
   text-transform: capitalize;
   border: none;
+  padding-left: 1rem;
+  appearance: none;
   &:active {
     background-color: $white;
   }
