@@ -46,19 +46,14 @@ const BoardSelection = ({ boards, toggle }: BoardSelection) => {
     if (boards) {
       setTotal(boards.length);
     }
-    console.log("Testing board selection component");
-  }, [boards]);
-
-  useEffect(() => {
     if (window.sessionStorage.getItem("currentBoard")) {
       setCurrentBoard(
         JSON.parse(window.sessionStorage.getItem("currentBoard")!),
       );
-    } else if (boards) {
+    } else if (boards.length > 0) {
       window.sessionStorage.setItem("currentBoard", JSON.stringify(boards[0]));
     }
   }, [boards]);
-  console.log("board toggle", hideBoard);
 
   return (
     <BoardContext.Provider value={currentBoard ? currentBoard : null}>

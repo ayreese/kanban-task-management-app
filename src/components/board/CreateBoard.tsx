@@ -41,7 +41,6 @@ const CreateBoard = ({
 
   /* Function to handle data after form submission */
   const onSubmit: SubmitHandler<Board> = async (data: Board) => {
-    console.log("sending", data);
     try {
       const result = await createBoard({
         variables: {
@@ -49,7 +48,6 @@ const CreateBoard = ({
           columns: data.columns,
         },
         onCompleted(data) {
-          console.log("placement Test", data.createBoard);
           setModalToggle(!modalToggle);
           window.sessionStorage.setItem!(
             "currentBoard",
@@ -58,9 +56,7 @@ const CreateBoard = ({
         },
         refetchQueries: [{ query: GET_BOARDS }],
       });
-    } catch (error) {
-      console.error("Error creating board:", error);
-    }
+    } catch (error) {}
   };
   /* JSX return value */
   if (mutationLoading) return <div>...Loading</div>;

@@ -20,6 +20,17 @@ const DeleteBoard = ({
       refetchQueries: [{ query: GET_BOARDS }],
       onCompleted(data, clientOptions) {
         setModalToggle(!modalToggle);
+        if (boards && boards.length > 0) {
+          window.sessionStorage.setItem!(
+            "currentBoard",
+            JSON.stringify(boards[0]),
+          );
+        } else {
+          window.sessionStorage.setItem!(
+            "currentBoard",
+            JSON.stringify({ id: "", authorId: "", name: "", columns: [] }),
+          );
+        }
         window.sessionStorage.setItem!(
           "currentBoard",
           JSON.stringify(boards && boards[0]),
