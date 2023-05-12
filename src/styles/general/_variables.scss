@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap");
+
+/* colors */
+$primary: #635fc7;
+$primary-hover: #a8a4ff;
+$white: #ffffff;
+$black: #000112;
+$light-bg: #f4f7fd;
+$dark-bg: #20212c;
+$md-grey: #828fa3;
+$dark-grey: #2b2c37;
+$light-lines: #e4ebfa;
+$dark-lines: #3e3f4e;
+$red: #ea5555;
+$red-hover: #ff9898;
+
+/* font */
+$bold: 700;
+$regular: 500;
+$font-family: "Plus Jakarta Sans";
+
+$sm-space: 1.25rem;
+$md-space: 2rem;
+
+.red {
+  background-color: red;
+}
+
+.purple {
+  background-color: $primary;
+}
+
+.teal {
+  background-color: teal;
+}
+
+.blue {
+  background-color: royalblue;
+}
+
+.green {
+  background-color: green;
+}
+
+.salmon {
+  background-color: salmon;
+}
+
+// @mixin xl-heading {
+//   font-family: $font-family;
+//   font-style: normal;
+//   font-weight: $bold;
+//   font-size: 24px;
+//   line-height: 30px;
+//   color: $black;
+// }
+
+// @mixin lg-heading {
+//   font-family: $font-family;
+//   font-style: normal;
+//   font-weight: $bold;
+//   font-size: 18px;
+//   line-height: 23px;
+//   color: $black;
+// }
+
+// @mixin md-heading {
+//   font-family: $font-family;
+//   font-style: normal;
+//   font-weight: $bold;
+//   font-size: 15px;
+//   line-height: 19px;
+//   color: $black;
+// }
+
+// @mixin sm-heading {
+//   font-family: $font-family;
+//   font-style: normal;
+//   font-weight: $bold;
+//   font-size: 12px;
+//   line-height: 15px;
+//   letter-spacing: 2.4px;
+//   color: $md-grey;
+// }
+
+// @mixin lg-body {
+//   font-family: $font-family;
+//   font-style: normal;
+//   font-weight: $regular;
+//   font-size: 13px;
+//   line-height: 23px;
+//   color: $dark-grey;
+// }
+
+// @mixin md-body {
+//   font-family: $font-family;
+//   font-style: normal;
+//   font-weight: $bold;
+//   font-size: 12px;
+//   line-height: 15px;
+//   color: $dark-grey;
+// }

@@ -1,0 +1,28 @@
+@use "../general" as *;
+@use "../mixins/" as *;
+
+.taskRowWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: pointer;
+  // min-width: 100%;
+}
+
+.task {
+  display: inline-block;
+  padding-block: $sm-space + 0.25;
+  padding-inline: $sm-space - 0.25;
+  border-radius: 0.5rem;
+  background-color: $white;
+  margin-bottom: $sm-space;
+  box-sizing: border-box;
+  cursor: pointer;
+  .taskTitle {
+    @include md-heading;
+  }
+  .subtaskCount {
+    @include md-body;
+    color: $md-grey;
+  }
+}

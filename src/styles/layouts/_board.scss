@@ -1,0 +1,356 @@
+@use "../general" as *;
+@use "../mixins" as *;
+
+.container {
+  background-color: $light-bg;
+  overflow: auto;
+  position: relative;
+  // max-width: 1440px;
+}
+
+.boardContainerGrid {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "logoArea selectedBoardArea"
+    "boardSelectionArea selectedBoardArea2";
+  column-gap: 0.3rem;
+  width: 100%;
+  // max-width: 1440px;
+
+  .logoArea {
+    grid-area: logoArea;
+    padding-block: $md-space + 0.75;
+    padding-inline: $md-space;
+    background-color: $white;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .boardSelectionArea {
+    grid-area: boardSelectionArea;
+    padding-top: $md-space;
+    background-color: $white;
+    transition: 0.5s;
+    min-width: 260px;
+  }
+
+  .hide {
+    transition: 0.5s;
+    transform: translateX(-200%);
+    position: absolute;
+    margin-inline: auto;
+  }
+
+  .toggle {
+    background-color: $primary;
+    transform: translateX(150%);
+    padding-block: $md-space;
+    padding-left: $md-space;
+    border-radius: 0 15rem 15rem 0;
+    transition: 0.5s;
+    position: relative;
+    max-width: 225px;
+    // width: 200px;
+    min-width: 10px;
+
+    button {
+      opacity: 0;
+      position: sticky;
+      left: 50rem;
+      z-index: 100;
+    }
+    svg {
+      position: fixed;
+      left: 11rem;
+      z-index: 10;
+    }
+  }
+
+  .boardSelectionArea .boardSelectionWrapper {
+    display: grid;
+    .allBoardsMdBody {
+      @include sm-heading($capital: true);
+      margin-bottom: $sm-space;
+      padding-left: $md-space;
+    }
+
+    .boardsWrapper .boards {
+      @include md-heading;
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+    }
+
+    .board {
+      display: flex;
+      gap: $sm-space;
+      align-items: center;
+      padding-block: 1rem;
+      padding-left: $md-space;
+      border-radius: 0 15rem 15rem 0;
+
+      button {
+        color: $md-grey;
+        background-color: transparent;
+        border: none;
+        align-self: center;
+        text-transform: capitalize;
+        cursor: pointer;
+      }
+    }
+
+    .active {
+      background-color: $primary;
+      color: white;
+
+      button {
+        color: $white;
+        background-color: transparent;
+        border: none;
+        align-self: center;
+      }
+    }
+
+    .newBoardButton > button {
+      color: $primary;
+    }
+
+    .boardPanelOptions {
+      margin-top: $md-space;
+      padding-left: $md-space;
+      align-self: end;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.25rem;
+    top: 6rem;
+    right: 2rem;
+    gap: 0;
+    border-radius: 1rem;
+    button {
+      border: none;
+      border-radius: 1rem 1rem 0 0;
+      padding-inline: 2rem;
+      padding-block: 0.5rem;
+      text-transform: capitalize;
+      font-family: $font-family;
+      background-color: white;
+      color: $md-grey;
+      cursor: pointer;
+      &:hover {
+        background-color: $light-bg;
+      }
+      &:active {
+        background-color: $white;
+      }
+    }
+    button:nth-of-type(2) {
+      color: $red;
+      border-radius: 0 0 1rem 1rem;
+    }
+  }
+
+  .createNewBoardWrapper {
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    font-family: $font-family;
+  }
+
+  .selectedBoardOptionsWrapper {
+    grid-area: selectedBoardArea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: $md-space;
+    padding-inline: $md-space;
+    background-color: white;
+
+    .selectedBoardNameXl {
+      @include xl-heading;
+      text-transform: capitalize;
+    }
+
+    .newTaskWrapper {
+      display: flex;
+      align-items: center;
+      gap: $sm-space;
+    }
+
+    .newTaskWrapper .newTaskBtn {
+      @include btn;
+      display: flex;
+      gap: 1rem;
+      p {
+        @media screen and (max-width: 750px) {
+          display: none;
+        }
+      }
+      &:disabled {
+        background-color: $md-grey !important;
+      }
+    }
+    // button:disabled {
+    //   background-color: $md-grey !important;
+    // }
+
+    .newTaskWrapper .menuBtn {
+      border: none;
+      padding-inline: 1rem;
+      background: none;
+      cursor: pointer;
+    }
+  }
+}
+
+/* switch styling start */
+
+.switchWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $md-space;
+  background-color: $light-bg;
+  width: min(100% - $md-space);
+  padding-block: $sm-space - 0.5;
+  margin-bottom: $sm-space;
+}
+
+.switchWrapper .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switchWrapper .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $primary;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: $white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: $md-grey;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px $primary;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.hideSideBarWrapper {
+  display: flex;
+  align-items: center;
+  gap: $sm-space;
+  margin-bottom: $md-space;
+}
+
+.hideSideBarWrapper button {
+  @include md-heading;
+  color: $md-grey;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+/* end of switch styling */
+.mobileLogo {
+  display: none;
+}
+.downArrow {
+  display: none;
+}
+/* mobile styling */
+@media screen and (max-width: 750px) {
+  .boardContainerGrid {
+    position: relative;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "selectedBoardArea"
+      "selectedBoardArea2";
+    .logoArea {
+      display: none;
+    }
+    .boardSelectionArea {
+      grid-area: none;
+      display: none;
+      min-width: 0;
+      margin-inline: auto;
+    }
+    .hide {
+      display: block;
+      position: absolute;
+      grid-area: auto;
+      // min-width: 318px;
+      // max-width: 390px;
+      width: min(390px, 100% - 1rem);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .mobileLogoWrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .mobileLogo {
+      display: block;
+    }
+    .downArrow {
+      display: block;
+    }
+
+    .toggle {
+      display: none;
+      transform: translateX(0%);
+    }
+  }
+}

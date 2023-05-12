@@ -1,0 +1,61 @@
+@use "../general" as *;
+@use "../mixins/" as *;
+
+.boardColumn {
+  display: flex;
+  gap: $sm-space;
+  padding: $sm-space;
+}
+
+.boardColumnsWrapper {
+  grid-area: selectedBoardArea2;
+  transition: 0.5s;
+  overflow: auto;
+  width: 100%;
+  height: 100vh;
+
+  &.hide2 {
+    // transition: 0.5s;
+    grid-column: 1 / span 2;
+    overflow: auto;
+    padding-left: 4.9rem;
+    padding-right: 1rem;
+  }
+  @media screen and (max-width: 750px) {
+    transition: 0;
+  }
+}
+
+.newColumnButtonWrapper {
+  display: flex;
+  justify-content: center;
+  padding-block: $md-space;
+  background-color: #d5dadd;
+  min-width: 18rem;
+  button {
+    @include xl-heading($capital: true);
+    color: $md-grey;
+    background-color: transparent;
+    border: none;
+  }
+}
+
+.columnWrapper {
+  min-width: 18rem;
+}
+
+.statusWrapper {
+  display: flex;
+  gap: $sm-space - 0.5;
+  margin-bottom: $sm-space;
+  width: fit-content;
+  .statusColor {
+    border-radius: 50%;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  p {
+    @include sm-heading;
+  }
+}

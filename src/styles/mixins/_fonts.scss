@@ -1,0 +1,92 @@
+@use "../general" as *;
+
+@mixin xl-heading($capital: false, $uppercase: false) {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: $bold;
+  font-size: 24px;
+  line-height: 30px;
+  color: $black;
+  @if $capital {
+    text-transform: capitalize;
+  }
+  @if $uppercase {
+    text-transform: uppercase;
+  }
+}
+
+@mixin lg-heading($capital: false, $uppercase: false) {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: $bold;
+  font-size: 18px;
+  line-height: 23px;
+  color: $black;
+  @if $capital {
+    text-transform: capitalize;
+  }
+  @if $uppercase {
+    text-transform: uppercase;
+  }
+}
+
+@mixin md-heading($capital: false, $uppercase: false) {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: $bold;
+  font-size: 15px;
+  line-height: 19px;
+  color: $black;
+  @if $capital {
+    text-transform: capitalize;
+  }
+  @if $uppercase {
+    text-transform: uppercase;
+  }
+}
+
+@mixin sm-heading($capital: false, $uppercase: false) {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: $bold;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 2.4px;
+  color: $md-grey;
+  @if $capital {
+    text-transform: capitalize;
+  }
+  @if $uppercase {
+    text-transform: uppercase;
+  }
+}
+
+@mixin lg-body($capital: false, $uppercase: false) {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: $regular;
+  font-size: 13px;
+  line-height: 23px;
+  color: $dark-grey;
+  @if $capital {
+    text-transform: capitalize;
+  }
+  @if $uppercase {
+    text-transform: uppercase;
+  }
+}
+
+@mixin md-body($capital: false, $uppercase: false) {
+  font-family: $font-family;
+  font-style: normal;
+  font-weight: $bold;
+  font-size: 12px;
+  line-height: 15px;
+  color: $dark-grey;
+  @if $capital {
+    text-transform: capitalize;
+  }
+  @if $uppercase {
+    text-transform: uppercase;
+  }
+}

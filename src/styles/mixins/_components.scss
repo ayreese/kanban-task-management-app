@@ -1,0 +1,13 @@
+@use "../general/variables" as *;
+@mixin btn {
+  //    @include sm-heading;
+  color: white;
+  background-color: $primary;
+  border: none;
+  border-radius: 1.5rem;
+  padding-block: $sm-space - 0.5;
+  padding-inline: $sm-space;
+  cursor: pointer;
+  text-transform: capitalize;
+  font-family: $font-family;
+}

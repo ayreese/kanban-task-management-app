@@ -1,0 +1,97 @@
+@use "../general" as *;
+@use "../mixins" as *;
+
+.authPageContainer {
+  font-family: $font-family;
+  text-transform: uppercase;
+  height: 100vh;
+  overflow: hidden;
+  p {
+    margin-top: 1rem;
+  }
+}
+
+.authTitleWrapper {
+  padding-top: 4rem;
+  padding-left: 4rem;
+}
+
+.authContainer {
+  display: grid;
+  font-family: $font-family;
+  overflow: hidden;
+  margin-top: 10rem;
+  h1 {
+    font-weight: 500;
+  }
+  .button {
+    color: $primary;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: $font-family;
+  padding: 2.5rem;
+  background-color: white;
+  border-radius: 1rem;
+  width: min(1080px, 100% - 3rem);
+  max-width: 50rem;
+  margin-inline: auto;
+
+  h1 {
+    text-align: center;
+  }
+  input {
+    display: block;
+    border: none;
+    outline: none;
+    width: 100%;
+    max-width: 50rem;
+    margin-inline: auto;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  input[type="submit"] {
+    padding-block: 0.5rem;
+    background-color: $primary;
+    color: $white;
+    &:hover {
+      background-color: $primary-hover;
+    }
+    &:focus {
+      background-color: $primary;
+    }
+  }
+}
+
+.selection {
+  letter-spacing: 3px;
+  display: flex;
+  gap: 1rem;
+  margin-inline: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .authTitleWrapper {
+    padding-top: 2rem;
+    padding-left: 2rem;
+  }
+  .authContainer {
+    margin-top: 2.5rem;
+  }
+  .selection {
+    gap: 0.1rem;
+    flex-direction: column;
+    text-align: center;
+  }
+  .form h1 {
+    font-size: 1.5rem;
+  }
+}
