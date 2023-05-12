@@ -18,7 +18,8 @@ export default function Home() {
   const [boardSelectToggle, setSelectToggle] = useState<boolean>(true);
 
   useEffect(() => {
-    setIsCookie(hasCookie("auth"));
+    const isAuth = hasCookie("auth");
+    setIsCookie(isAuth);
   }, [hasCookie("auth")]);
 
   if (queryLoading) return <>Loading...</>;
