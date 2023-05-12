@@ -20,7 +20,7 @@ export default function Home() {
   useEffect(() => {
     const isAuth = hasCookie("auth");
     setIsCookie(isAuth);
-  }, [hasCookie("auth")]);
+  }, [isCookie]);
 
   if (queryLoading) return <>Loading...</>;
   if (queryError) console.log("We got this error", queryError);
