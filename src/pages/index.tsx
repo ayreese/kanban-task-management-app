@@ -19,10 +19,6 @@ export default function Home() {
 
   useEffect(() => {
     setIsCookie(hasCookie("auth"));
-  }, [queryLoading]);
-
-  useEffect(() => {
-    setIsCookie(hasCookie("auth"));
   }, [hasCookie("auth")]);
 
   if (queryLoading) return <>Loading...</>;
