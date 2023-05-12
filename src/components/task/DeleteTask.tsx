@@ -54,8 +54,8 @@ const DeleteTask = ({
           <div className="confirmationTxt">
             <h3>Delete this task?</h3>
             <p>
-              Are you sure you want to delete the '{name}' task? This action
-              will remove all subtasks and cannot be reversed.
+              Are you sure you want to delete the '{name}&apos;' task? This
+              action will remove all subtasks and cannot be reversed.
             </p>
           </div>
           <div className="confirmationBtn">

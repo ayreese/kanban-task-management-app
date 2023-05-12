@@ -16,7 +16,7 @@ const Auth = () => {
     <div className="authPageContainer">
       <div className="authTitleWrapper">
         <Image src={logo} alt="light theme switch" />
-        <p>An app for managing task</p>
+        <p>An app for managing task&apos;s</p>
       </div>
       <div className="authContainer">
         {/* <h1>{type}</h1> */}
