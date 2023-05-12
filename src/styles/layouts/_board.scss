@@ -5,6 +5,7 @@
   background-color: $light-bg;
   overflow: auto;
   position: relative;
+  // max-width: 1440px;
 }
 
 .boardContainerGrid {
@@ -16,6 +17,7 @@
     "boardSelectionArea selectedBoardArea2";
   column-gap: 0.3rem;
   width: 100%;
+  // max-width: 1440px;
 
   .logoArea {
     grid-area: logoArea;
@@ -37,25 +39,22 @@
 
   .hide {
     transition: 0.5s;
-    transform: translateX(-125%);
-    min-width: 295px;
-    max-width: 390px;
-    width: 340px;
-    min-width: 0px;
+    transform: translateX(-200%);
+    position: absolute;
     margin-inline: auto;
   }
 
   .toggle {
     background-color: $primary;
-    transform: translateX(125%);
+    transform: translateX(150%);
     padding-block: $md-space;
     padding-left: $md-space;
     border-radius: 0 15rem 15rem 0;
     transition: 0.5s;
     position: relative;
-    max-width: 200px;
-
-    min-width: 150px;
+    max-width: 225px;
+    // width: 200px;
+    min-width: 10px;
 
     button {
       opacity: 0;
@@ -64,8 +63,8 @@
       z-index: 100;
     }
     svg {
-      position: sticky;
-      left: 11.5rem;
+      position: fixed;
+      left: 11rem;
       z-index: 10;
     }
   }
@@ -323,11 +322,15 @@ input:checked + .slider:before {
       grid-area: none;
       display: none;
       min-width: 0;
+      margin-inline: auto;
     }
     .hide {
       display: block;
       position: absolute;
       grid-area: auto;
+      // min-width: 318px;
+      // max-width: 390px;
+      width: min(390px, 100% - 1rem);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);

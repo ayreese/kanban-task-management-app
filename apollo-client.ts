@@ -3,8 +3,8 @@ import { setContext } from "@apollo/client/link/context";
 import { getCookie, hasCookie } from "cookies-next";
 
 const httpLink = new HttpLink({
-  uri: "/api/graphql",
-  credentials: "same-origin",
+  uri: "https://kanban-server-ar.herokuapp.com/api/graphql",
+  credentials: "omit",
 });
 
 const cache: InMemoryCache = new InMemoryCache({
