@@ -1,7 +1,7 @@
 import Head from "next/head";
 import {useEffect, useState} from "react";
 import BoardSelection from "@/components/board/BoardSelection";
-import {hasCookie} from "cookies-next";
+import {deleteCookie, hasCookie} from "cookies-next";
 import Auth from "@/components/auth/Auth";
 import {GET_BOARDS} from "@/graphql/query";
 import {useQuery} from "@apollo/client";
@@ -22,8 +22,19 @@ export default function Home() {
         setIsCookie(isAuth);
     }, [hasCookie("auth")]);
 
+    // An expired or otherwise rejected token: drop it and show the login form.
+    const isUnauthenticated = queryError?.graphQLErrors?.some(
+        (e) => e.extensions?.code === "UNAUTHENTICATED"
+    );
+    useEffect(() => {
+        if (isUnauthenticated && hasCookie("auth")) {
+            deleteCookie("auth", {path: "/"});
+            setIsCookie(false);
+        }
+    }, [isUnauthenticated]);
+
     if (queryLoading) return <>Loading...</>;
-    if (queryError) console.log("We got this error", queryError);
+    if (queryError && !isUnauthenticated) console.log("We got this error", queryError);
 
     return (
         <>
@@ -37,7 +48,7 @@ export default function Home() {
                 <link rel="icon" href="/public/assets/favicon-32x32.png"/>
             </Head>
             <main className="container">
-                {isCookie ? (
+                {isCookie && queryData ? (
                     <BoardSelection
                         boards={queryData.userBoards}
                         toggle={{state: boardSelectToggle, setState: setSelectToggle}}

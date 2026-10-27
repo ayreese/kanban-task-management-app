@@ -8,36 +8,40 @@ You can view the live website [here](https://lextrnd.github.io/kanban-task-manag
 
 ## Technologies Used
 
-The application is built using the following technologies:
-
-- ReactJS
-- Redux
-- Next.js
-- Node.js
-- Apollo
+- Next.js / React
+- Apollo Client
 - GraphQL
-- Postgres
+- SCSS
+
+The backend lives in a separate repo, [kanban-api](https://github.com/ayreese/kanban-api)
+(Apollo Server, Nexus, Prisma, Postgres).
 
 ## Features
 
-- Create Boards: Users can create multiple boards to manage different sets of tasks.
-- Create Tasks: Users can create new tasks within a board and add a description and due date.
-- Move Tasks: Users can move tasks between different stages of completion (To Do, In Progress, Done).
-- Delete Tasks: Users can delete tasks from a board.
-- Search Tasks: Users can search for tasks by name, description, or due date.
-- User Authentication: Users can create an account, login, and save their board and task data.
+- Create, edit and delete boards and their columns
+- Create, edit and delete tasks, with subtasks you can tick off
+- Move tasks between columns
+- Sign up and log in; each user only sees their own boards
 
-## Installation
+## Run locally
 
-To run the application locally, follow these steps:
+1. Start the API first: follow the steps in the
+   [kanban-api README](https://github.com/ayreese/kanban-api#run-locally).
+   It runs at `http://localhost:4000`.
+2. In this project:
 
-1. Clone the repository
-2. Install dependencies by running `npm install` in the project directory
-3. Start the server by running `npm run server` in the project directory
-4. Start the client by running `npm run client` in a new terminal window
-5. Open `http://localhost:3000` in a web browser to view the application
+   ```bash
+   cp .env.example .env.local   # only needed if the API isn't on localhost:4000
+   npm install
+   npm run dev
+   ```
 
-Note: You will need to set up a MongoDB Atlas account and obtain a connection string to enable data storage.
+3. Open `http://localhost:3000`.
+
+## Deploy
+
+Deploy the API first, then deploy this app (e.g. to Vercel) with
+`NEXT_PUBLIC_API_URL` set to the API's public URL.
 
 ## Contributing
 
