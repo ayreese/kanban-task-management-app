@@ -29,10 +29,13 @@ const SignUp = () => {
             },
         })
             .then((newData) => {
+                // Set from the browser, so it can't be httpOnly (browsers
+                // reject httpOnly cookies written by scripts).
                 setCookie("auth", newData.data.signUp.token, {
-                    httpOnly: true,
+                    path: "/",
+                    sameSite: "lax",
                     secure: process.env.NODE_ENV === 'production', // Set secure in production
-                    maxAge: 60 * 60 * 24, // 1 day expiration
+                    maxAge: 60 * 60 * 24, // 1 day, matches the API token lifetime
                 });
                 client.refetchQueries({include: "all"});
             })
@@ -55,7 +58,7 @@ const SignUp = () => {
                     type="password"
                 />
 
-                {errors.email && <span>This field is required</span>}
+                {errors.email && <span>{errors.email.message || "This field is required"}</span>}
                 {errors.password && <span>This field is required</span>}
 
                 <input type="submit" value="Submit"/>

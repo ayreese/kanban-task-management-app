@@ -35,7 +35,7 @@ const TaskCard = ({
   const [deleteTask, setDeleteTask] = useState<boolean>(false);
   /* filter subtasks with status completed */
   const completedSubtask = subtasks?.filter(
-    (completed) => completed.status === "completed",
+    (completed) => completed.status === "COMPLETE",
   );
   /* count for completed subtasks*/
   const completedSubCount = completedSubtask?.length;

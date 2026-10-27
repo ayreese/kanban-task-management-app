@@ -27,7 +27,7 @@ export const GET_BOARDS = gql`
 `;
 
 export const GET_BOARD = gql`
-  query board($id: string) {
+  query board($id: String) {
     board(id: $id) {
       name
       columns {
